@@ -42,7 +42,7 @@
         flex: 1 1 auto;
         font-size: var(--font-size-s, 14px);
         color: var(--color-text-primary-default, #0a0c11);
-        word-break: break-word;
+        overflow-wrap: anywhere;
     }
 
     &__remove {
