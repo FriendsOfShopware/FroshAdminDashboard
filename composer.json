@@ -29,8 +29,16 @@
             "en-GB": "Modular Admin Dashboard"
         },
         "description": {
-            "de-DE": "Ersetzt das Administrations-Dashboard durch ein modulares Widget-Board mit Drag & Drop. Die Anordnung wird pro Benutzer gespeichert.",
-            "en-GB": "Replaces the administration dashboard with a modular drag-and-drop widget board. The layout is persisted per user."
+            "de-DE": "Ersetzt das Shopware-Administrations-Dashboard durch ein modulares Drag-and-drop-Widget-Board mit Analyse-Diagrammen, Aufgaben und Notizen — pro Benutzer gespeichert.",
+            "en-GB": "Replaces the Shopware administration dashboard with a modular, drag-and-drop widget board featuring analytics charts, operational queues, notes and tasks — saved per user."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://github.com/FriendsOfShopware",
+            "en-GB": "https://github.com/FriendsOfShopware"
+        },
+        "supportLink": {
+            "de-DE": "https://github.com/FriendsOfShopware/FroshAdminDashboard/issues",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshAdminDashboard/issues"
         }
     }
 }
