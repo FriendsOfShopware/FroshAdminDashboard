@@ -1,0 +1,11 @@
+.frosh-widget-recent-customers {
+    &__grid {
+        border: none;
+    }
+
+    &__empty {
+        padding: 24px;
+        text-align: center;
+        color: var(--color-text-secondary-default, #758ca3);
+    }
+}

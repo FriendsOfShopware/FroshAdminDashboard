@@ -1,0 +1,17 @@
+.frosh-widget-recent-orders {
+    &__grid {
+        border: none;
+    }
+
+    &__state {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__empty {
+        padding: 24px;
+        text-align: center;
+        color: var(--color-text-secondary-default, #758ca3);
+    }
+}

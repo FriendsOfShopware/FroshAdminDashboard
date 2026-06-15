@@ -1,0 +1,17 @@
+.frosh-widget-group-requests {
+    &__grid {
+        border: none;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+
+    &__empty {
+        padding: 24px;
+        text-align: center;
+        color: var(--color-text-secondary-default, #758ca3);
+    }
+}

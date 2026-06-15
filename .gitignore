@@ -1,0 +1,8 @@
+/vendor/
+/node_modules/
+/src/Resources/public/
+*.log
+.DS_Store
+.idea/
+.phpunit.result.cache
+/src/Resources/app/administration/.tmp/

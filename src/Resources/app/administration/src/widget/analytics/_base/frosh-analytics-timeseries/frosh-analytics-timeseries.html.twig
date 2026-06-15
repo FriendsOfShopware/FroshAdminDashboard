@@ -1,0 +1,22 @@
+{% block frosh_analytics_timeseries %}
+<div class="frosh-analytics-timeseries">
+    <div class="frosh-analytics-timeseries__summary">{{ formattedSummary }}</div>
+
+    <sw-chart-card
+        class="frosh-analytics-timeseries__chart"
+        :available-ranges="availableRanges"
+        :series="chartSeries"
+        :options="chartOptions"
+        :is-loading="isLoading"
+        :type="chartType"
+        fill-empty-values
+        sort
+        position-identifier="frosh-analytics-timeseries"
+        @sw-chart-card-range-update="onRangeUpdate"
+    >
+        <template #range-option="{ range }">
+            {{ $tc(`frosh-admin-dashboard.analytics.range.${range}`) }}
+        </template>
+    </sw-chart-card>
+</div>
+{% endblock %}

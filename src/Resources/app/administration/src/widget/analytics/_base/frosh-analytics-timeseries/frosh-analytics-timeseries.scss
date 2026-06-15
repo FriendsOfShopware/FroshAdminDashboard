@@ -1,0 +1,30 @@
+.frosh-analytics-timeseries {
+    &__summary {
+        font-size: 1.5rem;
+        font-weight: var(--font-weight-bold, 700);
+        color: var(--color-text-primary-default, #0a0c11);
+        margin-bottom: 8px;
+    }
+
+    // The chart card brings its own border; keep the widget body flush.
+    &__chart {
+        border: none;
+        box-shadow: none;
+
+        // Give the range picker more room so the label is comfortably readable.
+        .sw-chart-card__header-right {
+            min-width: 160px;
+        }
+
+        // The range <select> overlays its dropdown chevron on the right; in the
+        // narrow widget layout the option text collides with it. Reserve room
+        // and let the field fill the widened header.
+        .sw-field--select {
+            width: 100%;
+        }
+
+        .sw-field--select select {
+            padding-right: 32px;
+        }
+    }
+}

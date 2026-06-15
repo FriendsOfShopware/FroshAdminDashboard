@@ -1,0 +1,78 @@
+.frosh-dashboard-widget {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-elevation-surface-raised, #fff);
+    border: 1px solid var(--color-border-primary-default, #d1d9e0);
+    border-radius: var(--border-radius-default, 8px);
+    box-shadow: var(--elevation-shadow-resting, 0 1px 2px rgba(0, 0, 0, 0.08));
+    overflow: hidden;
+    height: 100%;
+
+    &--editing {
+        border-style: dashed;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--color-border-primary-default, #d1d9e0);
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: var(--font-weight-semibold, 600);
+        font-size: var(--font-size-s, 14px);
+        color: var(--color-text-primary-default, #0a0c11);
+    }
+
+    &__drag-handle {
+        cursor: grab;
+        color: var(--color-icon-primary-default, #758ca3);
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    &__control {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        border-radius: var(--border-radius-default, 4px);
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-icon-primary-default, #758ca3);
+
+        &:hover {
+            background: var(--color-interaction-secondary-hover, #f0f2f5);
+        }
+
+        &--danger:hover {
+            color: var(--color-icon-critical-default, #de294c);
+        }
+    }
+
+    &__body {
+        padding: 16px;
+        flex: 1 1 auto;
+        min-height: 80px;
+    }
+
+    &__missing {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-text-critical-default, #de294c);
+        font-size: var(--font-size-s, 14px);
+    }
+}

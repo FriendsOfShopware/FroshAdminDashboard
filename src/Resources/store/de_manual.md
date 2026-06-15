@@ -1,0 +1,1 @@
+Einfach in der Administration über den Shopware App Manager installieren. Nach der Aktivierung wird das Dashboard automatisch ersetzt; öffne es über das Hauptmenü und nutze die Schaltfläche „Anpassen", um deine Widgets hinzuzufügen und anzuordnen.

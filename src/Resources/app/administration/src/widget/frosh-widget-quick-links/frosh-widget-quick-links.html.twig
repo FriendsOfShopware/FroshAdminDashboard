@@ -1,0 +1,13 @@
+{% block frosh_widget_quick_links %}
+<div class="frosh-widget-quick-links">
+    <router-link
+        v-for="link in links"
+        :key="link.route"
+        :to="{ name: link.route }"
+        class="frosh-widget-quick-links__link"
+    >
+        <mt-icon :name="link.icon" size="20px" />
+        <span>{{ $tc(link.label) }}</span>
+    </router-link>
+</div>
+{% endblock %}

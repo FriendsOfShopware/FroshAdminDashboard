@@ -1,0 +1,54 @@
+{% block frosh_analytics_breakdown %}
+<div class="frosh-analytics-breakdown">
+
+    {% block frosh_analytics_breakdown_toolbar %}
+    <div class="frosh-analytics-breakdown__toolbar">
+        <sw-context-button :menu-width="160">
+            <template #button>
+                <button class="frosh-analytics-breakdown__range" type="button">
+                    {{ $tc(`frosh-admin-dashboard.analytics.range.${selectedRange}`) }}
+                    <mt-icon name="regular-chevron-down-xs" size="12px" decorative />
+                </button>
+            </template>
+
+            <sw-context-menu-item
+                v-for="range in ['30Days', '14Days', '7Days', 'yesterday']"
+                :key="range"
+                :class="{ 'is--active': selectedRange === range }"
+                @click="onRangeUpdate(range)"
+            >
+                {{ $tc(`frosh-admin-dashboard.analytics.range.${range}`) }}
+            </sw-context-menu-item>
+        </sw-context-button>
+    </div>
+    {% endblock %}
+
+    {% block frosh_analytics_breakdown_loader %}
+    <sw-loader v-if="isLoading" />
+    {% endblock %}
+
+    {% block frosh_analytics_breakdown_list %}
+    <ul v-else-if="rows.length" class="frosh-analytics-breakdown__list">
+        <li
+            v-for="row in rows"
+            :key="row.id"
+            class="frosh-analytics-breakdown__row"
+        >
+            <div class="frosh-analytics-breakdown__row-head">
+                <span class="frosh-analytics-breakdown__row-name" :title="row.name">{{ row.name }}</span>
+                <span class="frosh-analytics-breakdown__row-value">{{ row.formattedValue }}</span>
+            </div>
+            <div class="frosh-analytics-breakdown__bar-track">
+                <div class="frosh-analytics-breakdown__bar" :style="{ width: barWidth(row) }"></div>
+            </div>
+        </li>
+    </ul>
+    {% endblock %}
+
+    {% block frosh_analytics_breakdown_empty %}
+    <div v-else class="frosh-analytics-breakdown__empty">
+        {{ $tc('frosh-admin-dashboard.analytics.empty') }}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}

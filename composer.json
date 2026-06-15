@@ -1,0 +1,36 @@
+{
+    "name": "frosh/admin-dashboard",
+    "description": "Replaces the Shopware administration dashboard with a modular, drag-and-drop widget board. The layout is persisted per-user.",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frosh"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Frosh\\AdminDashboard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Frosh\\AdminDashboard\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Frosh\\AdminDashboard\\FroshAdminDashboard",
+        "label": {
+            "de-DE": "Modulares Admin Dashboard",
+            "en-GB": "Modular Admin Dashboard"
+        },
+        "description": {
+            "de-DE": "Ersetzt das Administrations-Dashboard durch ein modulares Widget-Board mit Drag & Drop. Die Anordnung wird pro Benutzer gespeichert.",
+            "en-GB": "Replaces the administration dashboard with a modular drag-and-drop widget board. The layout is persisted per user."
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{% block frosh_dashboard_index %}
+<sw-page class="frosh-dashboard-index" :show-smart-bar="false">
+    {% block frosh_dashboard_index_content %}
+    <template #content>
+        <div class="frosh-dashboard-index__content">
+            <frosh-dashboard-grid />
+        </div>
+    </template>
+    {% endblock %}
+</sw-page>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% block frosh_widget_average_order_value %}
+<frosh-analytics-timeseries
+    :fetcher="fetchAverageOrderValue"
+    :series-name="$tc('frosh-admin-dashboard.widget.averageOrderValue.seriesName')"
+    chart-type="line"
+    value-format="money"
+    :settings="settings"
+/>
+{% endblock %}

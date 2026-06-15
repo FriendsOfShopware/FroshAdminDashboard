@@ -1,0 +1,25 @@
+.frosh-widget-quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 8px;
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px 8px;
+        border-radius: var(--border-radius-default, 8px);
+        background: var(--color-elevation-surface-default, #f9fafb);
+        color: var(--color-text-primary-default, #0a0c11);
+        text-decoration: none;
+        font-size: var(--font-size-xs, 12px);
+        text-align: center;
+        transition: background 0.1s ease-in-out;
+
+        &:hover {
+            background: var(--color-interaction-secondary-hover, #f0f2f5);
+        }
+    }
+}

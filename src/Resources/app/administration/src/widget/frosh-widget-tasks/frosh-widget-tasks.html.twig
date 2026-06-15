@@ -1,0 +1,61 @@
+{% block frosh_widget_tasks %}
+<div class="frosh-widget-tasks">
+
+    {% block frosh_widget_tasks_input %}
+    <form class="frosh-widget-tasks__add" @submit.prevent="onAddTask">
+        <mt-text-field
+            v-model="newTask"
+            class="frosh-widget-tasks__add-field"
+            :placeholder="$tc('frosh-admin-dashboard.widget.tasks.placeholder')"
+            size="small"
+        />
+        <mt-button
+            variant="primary"
+            size="small"
+            type="submit"
+            :disabled="!newTask.trim()"
+        >
+            <mt-icon name="regular-plus" size="14px" />
+        </mt-button>
+    </form>
+    {% endblock %}
+
+    {% block frosh_widget_tasks_list %}
+    <ul v-if="visibleTasks.length" class="frosh-widget-tasks__list">
+        <li
+            v-for="task in visibleTasks"
+            :key="task.id"
+            class="frosh-widget-tasks__item"
+            :class="{ 'is--done': task.done }"
+        >
+            <mt-checkbox
+                :checked="task.done"
+                class="frosh-widget-tasks__check"
+                @update:checked="onToggle(task)"
+            />
+            <span class="frosh-widget-tasks__text">{{ task.text }}</span>
+            <button
+                class="frosh-widget-tasks__remove"
+                type="button"
+                :title="$tc('frosh-admin-dashboard.widget.tasks.remove')"
+                @click="onRemove(task.id)"
+            >
+                <mt-icon name="regular-trash" size="12px" />
+            </button>
+        </li>
+    </ul>
+    {% endblock %}
+
+    {% block frosh_widget_tasks_empty %}
+    <div v-else class="frosh-widget-tasks__empty">
+        {{ $tc('frosh-admin-dashboard.widget.tasks.empty') }}
+    </div>
+    {% endblock %}
+
+    {% block frosh_widget_tasks_footer %}
+    <div v-if="tasks.length" class="frosh-widget-tasks__footer">
+        {{ $tc('frosh-admin-dashboard.widget.tasks.openCount', openCount, { count: openCount }) }}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}

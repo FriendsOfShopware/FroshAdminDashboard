@@ -1,0 +1,9 @@
+{% block frosh_widget_new_customer %}
+<frosh-analytics-timeseries
+    :fetcher="fetchNewCustomers"
+    :series-name="$tc('frosh-admin-dashboard.widget.newCustomer.seriesName')"
+    chart-type="line"
+    value-format="number"
+    :settings="settings"
+/>
+{% endblock %}

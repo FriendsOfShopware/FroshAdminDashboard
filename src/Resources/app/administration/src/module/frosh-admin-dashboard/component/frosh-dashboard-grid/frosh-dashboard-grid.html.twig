@@ -1,0 +1,99 @@
+{% block frosh_dashboard_grid %}
+<div class="frosh-dashboard-grid" :class="{ 'frosh-dashboard-grid--editing': isEditing }">
+
+    {% block frosh_dashboard_grid_toolbar %}
+    <div class="frosh-dashboard-grid__toolbar">
+        <div class="frosh-dashboard-grid__toolbar-status">
+            <sw-loader v-if="isSaving" size="16px" />
+            <span v-if="isEditing" class="frosh-dashboard-grid__hint">
+                {{ $tc('frosh-admin-dashboard.grid.editHint') }}
+            </span>
+        </div>
+
+        <div class="frosh-dashboard-grid__toolbar-actions">
+            <mt-button
+                v-if="isEditing"
+                variant="secondary"
+                size="small"
+                @click="showAddModal = true"
+            >
+                <mt-icon name="regular-plus" size="14px" />
+                {{ $tc('frosh-admin-dashboard.grid.addWidget') }}
+            </mt-button>
+
+            <mt-button
+                :variant="isEditing ? 'primary' : 'secondary'"
+                size="small"
+                @click="toggleEdit"
+            >
+                <mt-icon :name="isEditing ? 'regular-checkmark' : 'regular-cog'" size="14px" />
+                {{ isEditing ? $tc('frosh-admin-dashboard.grid.done') : $tc('frosh-admin-dashboard.grid.customize') }}
+            </mt-button>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block frosh_dashboard_grid_loader %}
+    <sw-loader v-if="isLoading" />
+    {% endblock %}
+
+    {% block frosh_dashboard_grid_board %}
+    <div v-else class="frosh-dashboard-grid__board">
+        {% block frosh_dashboard_grid_widget %}
+        <frosh-dashboard-widget
+            v-for="placed in layout"
+            :key="placed.uid"
+            :placed="placed"
+            :definition="widgetDefinition(placed)"
+            :editing="isEditing"
+            :class="[
+                `frosh-dashboard-grid__item--${placed.size}`,
+                {
+                    'frosh-dashboard-grid__item--dragging': draggedUid === placed.uid,
+                    'frosh-dashboard-grid__item--drag-over': dragOverUid === placed.uid && draggedUid !== placed.uid,
+                }
+            ]"
+            :draggable="isEditing"
+            @dragstart="onDragStart(placed.uid, $event)"
+            @dragover="onDragOver(placed.uid, $event)"
+            @drop="onDrop(placed.uid)"
+            @dragend="onDragEnd"
+            @remove="onRemoveWidget(placed.uid)"
+            @resize="onResizeWidget(placed.uid, $event)"
+            @configure="onConfigureWidget(placed.uid)"
+            @update-settings="onWidgetSettingsUpdate(placed.uid, $event)"
+        />
+        {% endblock %}
+
+        {% block frosh_dashboard_grid_empty %}
+        <div v-if="!layout.length" class="frosh-dashboard-grid__empty">
+            <mt-icon name="regular-rocket" size="48px" />
+            <p>{{ $tc('frosh-admin-dashboard.grid.empty') }}</p>
+            <mt-button variant="primary" size="small" @click="isEditing = true; showAddModal = true">
+                {{ $tc('frosh-admin-dashboard.grid.addWidget') }}
+            </mt-button>
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+    {% block frosh_dashboard_grid_add_modal %}
+    <frosh-dashboard-add-widget-modal
+        v-if="showAddModal"
+        :widgets="availableWidgets"
+        @add="onAddWidget"
+        @close="showAddModal = false"
+    />
+    {% endblock %}
+
+    {% block frosh_dashboard_grid_settings_modal %}
+    <frosh-dashboard-settings-modal
+        v-if="configuringPlacement && configuringDefinition"
+        :definition="configuringDefinition"
+        :model-value="configuringPlacement.settings"
+        @save="onConfigureSave"
+        @close="configuringUid = null"
+    />
+    {% endblock %}
+</div>
+{% endblock %}

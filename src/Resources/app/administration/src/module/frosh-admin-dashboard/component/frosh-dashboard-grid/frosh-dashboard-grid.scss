@@ -1,0 +1,108 @@
+.frosh-dashboard-grid {
+    --frosh-grid-columns: 12;
+    --frosh-grid-gap: 16px;
+
+    padding: 24px;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+
+    &__toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        min-height: 32px;
+    }
+
+    &__toolbar-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__toolbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__hint {
+        color: var(--color-text-secondary-default, #758ca3);
+        font-size: var(--font-size-xs, 12px);
+    }
+
+    &__board {
+        display: grid;
+        grid-template-columns: repeat(var(--frosh-grid-columns), 1fr);
+        gap: var(--frosh-grid-gap);
+        align-items: start;
+    }
+
+    // Column spans per widget size. Collapse to full width on small screens.
+    &__item--small {
+        grid-column: span 3;
+    }
+
+    &__item--medium {
+        grid-column: span 6;
+    }
+
+    &__item--large {
+        grid-column: span 8;
+    }
+
+    &__item--full {
+        grid-column: 1 / -1;
+    }
+
+    &__item--dragging {
+        opacity: 0.4;
+    }
+
+    &__item--drag-over {
+        outline: 2px dashed var(--color-border-brand-selected, #189eff);
+        outline-offset: 2px;
+        border-radius: var(--border-radius-default, 8px);
+    }
+
+    &--editing &__item--small,
+    &--editing &__item--medium,
+    &--editing &__item--large,
+    &--editing &__item--full {
+        cursor: grab;
+    }
+
+    &__empty {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 64px 24px;
+        color: var(--color-text-secondary-default, #758ca3);
+        text-align: center;
+        border: 1px dashed var(--color-border-primary-default, #d1d9e0);
+        border-radius: var(--border-radius-default, 8px);
+    }
+
+    @media (max-width: 90rem) {
+        &__item--large {
+            grid-column: span 12;
+        }
+    }
+
+    @media (max-width: 60rem) {
+        &__board {
+            --frosh-grid-columns: 1;
+        }
+
+        &__item--small,
+        &__item--medium,
+        &__item--large,
+        &__item--full {
+            grid-column: 1 / -1;
+        }
+    }
+}

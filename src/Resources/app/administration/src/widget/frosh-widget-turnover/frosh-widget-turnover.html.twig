@@ -1,0 +1,54 @@
+<div
+    v-if="acl.can('order.viewer')"
+    class="sw-dashboard-statistics frosh-widget-turnover"
+>
+    <template v-if="hasOrderToday">
+        <div class="sw-dashboard-statistics__card-headline">
+            <h1>{{ $t('sw-dashboard.todayStats.headline') }}</h1>
+
+            <span class="sw-dashboard-statistics__card-headline-timerange">
+                {{ formatChartHeadlineDate(today) }}
+            </span>
+        </div>
+
+        <mt-card
+            :is-loading="!todayOrderDataLoaded"
+            class="sw-dashboard-statistics__intro-stats"
+            position-identifier=""
+        >
+            <div class="sw-dashboard-statistics__intro-stats-today">
+                <div
+                    v-if="hasOrderToday"
+                    class="sw-dashboard-statistics__intro-stats-today-stats"
+                >
+                    <div class="sw-dashboard-statistics__intro-stats-today-single-stat">
+                        <span class="sw-dashboard-statistics__intro-stats-today-single-stat-number-type">{{ $t('sw-dashboard.todayStats.turnover') }}</span>
+                        <span class="sw-dashboard-statistics__intro-stats-today-single-stat-number-value">{{ currencyFilter(orderSumToday, systemCurrencyISOCode, 2) }}</span>
+                    </div>
+                </div>
+            </div>
+        </mt-card>
+    </template>
+
+    <template v-if="isLoading || hasOrderInMonth">
+        <sw-chart-card
+            class="sw-dashboard-statistics__statistics-sum"
+            :available-ranges="availableRanges"
+            :card-subtitle="getCardSubtitle(turnoverDateRange)"
+            :series="orderSumSeries"
+            :options="chartOptionsOrderSum"
+            :fill-empty-values="turnoverDateRange.aggregate"
+            :card-title="$t('sw-dashboard.monthStats.turnover')"
+            :help-text="$t('sw-dashboard.monthStats.helperText')"
+            :is-loading="isLoading"
+            type="line"
+            sort
+            position-identifier=""
+            @sw-chart-card-range-update="onTurnoverRangeUpdate"
+        >
+            <template #range-option="{ range }">
+                {{ $t(`sw-dashboard.monthStats.dateRanges.${range}`) }}
+            </template>
+        </sw-chart-card>
+    </template>
+</div>

@@ -1,0 +1,12 @@
+.frosh-dashboard-settings-modal {
+    &__fields {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__empty {
+        padding: 16px 0;
+        color: var(--color-text-secondary-default, #758ca3);
+    }
+}

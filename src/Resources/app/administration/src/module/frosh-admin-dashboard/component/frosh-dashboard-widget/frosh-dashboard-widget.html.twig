@@ -1,0 +1,108 @@
+{% block frosh_dashboard_widget %}
+<div class="frosh-dashboard-widget" :class="{ 'frosh-dashboard-widget--editing': editing }">
+
+    {% block frosh_dashboard_widget_header %}
+    <div class="frosh-dashboard-widget__header">
+        {% block frosh_dashboard_widget_title %}
+        <div class="frosh-dashboard-widget__title">
+            <mt-icon
+                v-if="editing"
+                class="frosh-dashboard-widget__drag-handle"
+                name="regular-grip-vertical"
+                size="14px"
+            />
+            <mt-icon v-if="definition" :name="definition.icon" size="16px" />
+            <span>{{ label }}</span>
+        </div>
+        {% endblock %}
+
+        {% block frosh_dashboard_widget_controls %}
+        <div v-if="editing" class="frosh-dashboard-widget__controls">
+
+            {% block frosh_dashboard_widget_control_settings %}
+            <button
+                v-if="hasSettings"
+                class="frosh-dashboard-widget__control"
+                type="button"
+                :title="$tc('frosh-admin-dashboard.widget.configure')"
+                @click="$emit('configure')"
+            >
+                <mt-icon name="regular-cog" size="12px" />
+            </button>
+            {% endblock %}
+
+            {% block frosh_dashboard_widget_control_resize %}
+            <sw-context-button
+                v-if="canResize"
+                class="frosh-dashboard-widget__control-resize"
+                :menu-width="160"
+            >
+                <template #button>
+                    <button
+                        class="frosh-dashboard-widget__control"
+                        type="button"
+                        :title="$tc('frosh-admin-dashboard.widget.resize')"
+                    >
+                        <mt-icon name="regular-expand" size="12px" />
+                    </button>
+                </template>
+
+                <sw-context-menu-item
+                    v-for="size in supportedSizes"
+                    :key="size"
+                    :class="{ 'is--active': placed.size === size }"
+                    @click="$emit('resize', size)"
+                >
+                    {{ sizeLabel(size) }}
+                </sw-context-menu-item>
+            </sw-context-button>
+            {% endblock %}
+
+            {% block frosh_dashboard_widget_control_remove %}
+            <button
+                class="frosh-dashboard-widget__control frosh-dashboard-widget__control--danger"
+                type="button"
+                :title="$tc('frosh-admin-dashboard.widget.remove')"
+                @click="$emit('remove')"
+            >
+                <mt-icon name="regular-trash" size="12px" />
+            </button>
+            {% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+    {% block frosh_dashboard_widget_body %}
+    <div class="frosh-dashboard-widget__body">
+        {% block frosh_dashboard_widget_body_known %}
+        <component
+            :is="definition.component"
+            v-if="isKnown && hasAccess"
+            :settings="placed.settings"
+            :editing="editing"
+            @update-settings="onSettingsUpdate"
+        />
+        {% endblock %}
+
+        {% block frosh_dashboard_widget_body_no_access %}
+        <div
+            v-else-if="isKnown && !hasAccess"
+            v-tooltip="{ message: $tc('frosh-admin-dashboard.widget.missingPrivileges', { privileges: missingPrivileges.join(', ') }) }"
+            class="frosh-dashboard-widget__missing"
+        >
+            <mt-icon name="regular-lock" size="20px" />
+            <span>{{ $tc('frosh-admin-dashboard.widget.noAccess') }}</span>
+        </div>
+        {% endblock %}
+
+        {% block frosh_dashboard_widget_body_unknown %}
+        <div v-else class="frosh-dashboard-widget__missing">
+            <mt-icon name="regular-exclamation-triangle" size="20px" />
+            <span>{{ $tc('frosh-admin-dashboard.widget.unknown', { id: placed.widgetId }) }}</span>
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}

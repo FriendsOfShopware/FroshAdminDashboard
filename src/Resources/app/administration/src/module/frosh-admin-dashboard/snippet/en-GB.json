@@ -1,0 +1,199 @@
+{
+    "frosh-admin-dashboard": {
+        "general": {
+            "mainMenuItemGeneral": "Dashboard",
+            "descriptionTextModule": "Modular widget dashboard"
+        },
+        "grid": {
+            "customize": "Customize",
+            "done": "Done",
+            "addWidget": "Add widget",
+            "editHint": "Drag widgets to rearrange them. Use the controls to resize or remove them.",
+            "empty": "Your dashboard is empty. Add your first widget to get started."
+        },
+        "group": {
+            "analytics": "Analytics",
+            "productivity": "Productivity",
+            "other": "Other"
+        },
+        "analytics": {
+            "salesChannel": "Sales channel",
+            "salesChannelHelp": "Limit the data to one sales channel. Leave empty for all.",
+            "empty": "No data for the selected range.",
+            "range": {
+                "30Days": "Last 30 days",
+                "14Days": "Last 14 days",
+                "7Days": "Last 7 days",
+                "yesterday": "Yesterday"
+            }
+        },
+        "size": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "full": "Full width"
+        },
+        "settingsModal": {
+            "title": "{ widget } settings",
+            "empty": "This widget has no settings."
+        },
+        "widget": {
+            "resize": "Resize",
+            "remove": "Remove",
+            "configure": "Configure",
+            "unknown": "Unknown widget \"{ id }\". The providing plugin may be disabled.",
+            "noAccess": "Missing permissions",
+            "missingPrivileges": "You are missing the following permissions: { privileges }",
+            "statistics": {
+                "label": "Order statistics",
+                "description": "Today's orders, turnover and trend charts."
+            },
+            "totalSales": {
+                "label": "Total sales",
+                "description": "Total order value over time.",
+                "seriesName": "Total sales"
+            },
+            "numberOfOrder": {
+                "label": "Number of orders",
+                "description": "Order count over time.",
+                "seriesName": "Orders"
+            },
+            "averageOrderValue": {
+                "label": "Average order value",
+                "description": "Average order value over time.",
+                "seriesName": "Average order value"
+            },
+            "newCustomer": {
+                "label": "New customers",
+                "description": "New customer registrations over time.",
+                "seriesName": "New customers"
+            },
+            "numberOfCustomer": {
+                "label": "Total customers",
+                "description": "Cumulative number of customers over time.",
+                "seriesName": "Customers"
+            },
+            "bestSellingProduct": {
+                "label": "Best-selling products",
+                "description": "Top products by sold quantity."
+            },
+            "manufacturer": {
+                "label": "Top manufacturers",
+                "description": "Sold quantity per manufacturer."
+            },
+            "country": {
+                "label": "Orders by country",
+                "description": "Order count per billing country."
+            },
+            "paymentMethod": {
+                "label": "Payment methods",
+                "description": "Payment method usage share."
+            },
+            "shippingMethod": {
+                "label": "Shipping methods",
+                "description": "Shipping method usage share."
+            },
+            "salesChannelSales": {
+                "label": "Sales by channel",
+                "description": "Total sales per sales channel."
+            },
+            "promotionCode": {
+                "label": "Top promotion codes",
+                "description": "Most-used promotion codes by order count."
+            },
+            "orders": {
+                "label": "Orders",
+                "description": "Today's orders and the order-count trend chart."
+            },
+            "turnover": {
+                "label": "Turnover",
+                "description": "Today's turnover and the turnover trend chart."
+            },
+            "recentOrders": {
+                "label": "Recent orders",
+                "description": "The latest orders at a glance.",
+                "salesChannel": "Sales channel",
+                "salesChannelHelp": "Limit the list to one sales channel. Leave empty to show all.",
+                "limit": "Number of orders",
+                "noAccess": "You do not have permission to view orders.",
+                "empty": "No orders found."
+            },
+            "recentCustomers": {
+                "label": "Recent registrations",
+                "description": "The latest customer registrations at a glance.",
+                "columnSalesChannel": "Sales channel",
+                "salesChannel": "Sales channel",
+                "salesChannelHelp": "Limit the list to one sales channel. Leave empty to show all.",
+                "limit": "Number of customers",
+                "noAccess": "You do not have permission to view customers.",
+                "empty": "No customers found."
+            },
+            "groupRequests": {
+                "label": "B2B group requests",
+                "description": "Customers requesting access to another customer group, with accept/decline actions.",
+                "columnCurrentGroup": "Current group",
+                "columnRequestedGroup": "Requested group",
+                "salesChannel": "Sales channel",
+                "salesChannelHelp": "Limit the list to one sales channel. Leave empty to show all.",
+                "limit": "Number of requests",
+                "accept": "Accept",
+                "decline": "Decline",
+                "acceptSuccess": "The group request has been accepted.",
+                "declineSuccess": "The group request has been declined.",
+                "error": "The group request could not be processed.",
+                "noAccess": "You do not have permission to view customers.",
+                "empty": "No open group requests."
+            },
+            "pendingReviews": {
+                "label": "Pending reviews",
+                "description": "Product reviews awaiting approval, with approve/decline actions.",
+                "salesChannel": "Sales channel",
+                "salesChannelHelp": "Limit the list to one sales channel. Leave empty to show all.",
+                "limit": "Number of reviews",
+                "approve": "Approve",
+                "decline": "Decline",
+                "approveSuccess": "The review has been approved.",
+                "declineSuccess": "The review has been deleted.",
+                "error": "The review could not be processed.",
+                "deleteModalTitle": "Delete review",
+                "deleteModalText": "Declining deletes the review \"{ title }\" permanently. This cannot be undone.",
+                "deleteConfirm": "Delete",
+                "noAccess": "You do not have permission to view reviews.",
+                "empty": "No reviews awaiting approval."
+            },
+            "quickLinks": {
+                "label": "Quick links",
+                "description": "Shortcuts to the most used areas.",
+                "products": "Products",
+                "orders": "Orders",
+                "customers": "Customers",
+                "categories": "Categories",
+                "settings": "Settings"
+            },
+            "notes": {
+                "label": "Notes",
+                "description": "A personal notepad.",
+                "placeholder": "Write a quick note…",
+                "accent": "Accent colour"
+            },
+            "tasks": {
+                "label": "Task list",
+                "description": "A personal to-do list.",
+                "placeholder": "Add a task…",
+                "remove": "Remove task",
+                "hideCompleted": "Hide completed tasks",
+                "empty": "No tasks yet. Add your first one above.",
+                "openCount": "{count} task open | {count} tasks open"
+            }
+        },
+        "addModal": {
+            "title": "Add a widget",
+            "empty": "No more widgets available to add.",
+            "noAccess": "Missing permissions",
+            "missingPrivileges": "You are missing the following permissions: { privileges }"
+        },
+        "notification": {
+            "saveError": "The dashboard layout could not be saved."
+        }
+    }
+}

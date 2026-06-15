@@ -1,0 +1,71 @@
+{% block frosh_dashboard_add_widget_modal %}
+<sw-modal
+    class="frosh-dashboard-add-widget-modal"
+    :title="$tc('frosh-admin-dashboard.addModal.title')"
+    @modal-close="$emit('close')"
+>
+    {% block frosh_dashboard_add_widget_modal_groups %}
+    <div class="frosh-dashboard-add-widget-modal__groups">
+        {% block frosh_dashboard_add_widget_modal_group %}
+        <section
+            v-for="section in groupedWidgets"
+            :key="section.group.id"
+            class="frosh-dashboard-add-widget-modal__group"
+        >
+            {% block frosh_dashboard_add_widget_modal_group_heading %}
+            <h3 class="frosh-dashboard-add-widget-modal__group-heading">
+                {{ $tc(section.group.label) }}
+            </h3>
+            {% endblock %}
+
+            {% block frosh_dashboard_add_widget_modal_grid %}
+            <div class="frosh-dashboard-add-widget-modal__grid">
+                <button
+                    v-for="widget in section.widgets"
+                    :key="widget.id"
+                    v-tooltip="{ message: missingPrivilegesTooltip(widget), disabled: hasAccess(widget) }"
+                    class="frosh-dashboard-add-widget-modal__card"
+                    :class="{ 'is--disabled': !hasAccess(widget) }"
+                    type="button"
+                    :disabled="!hasAccess(widget)"
+                    @click="onSelect(widget)"
+                >
+                    <mt-icon :name="widget.icon" size="24px" />
+                    <span class="frosh-dashboard-add-widget-modal__card-label">{{ $tc(widget.label) }}</span>
+                    <span
+                        v-if="widget.description"
+                        class="frosh-dashboard-add-widget-modal__card-description"
+                    >
+                        {{ $tc(widget.description) }}
+                    </span>
+
+                    <span
+                        v-if="!hasAccess(widget)"
+                        class="frosh-dashboard-add-widget-modal__card-lock"
+                    >
+                        <mt-icon name="regular-lock" size="12px" />
+                        {{ $tc('frosh-admin-dashboard.addModal.noAccess') }}
+                    </span>
+                </button>
+            </div>
+            {% endblock %}
+        </section>
+        {% endblock %}
+
+        {% block frosh_dashboard_add_widget_modal_empty %}
+        <div v-if="!widgets.length" class="frosh-dashboard-add-widget-modal__empty">
+            {{ $tc('frosh-admin-dashboard.addModal.empty') }}
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+    {% block frosh_dashboard_add_widget_modal_footer %}
+    <template #modal-footer>
+        <mt-button variant="secondary" size="small" @click="$emit('close')">
+            {{ $tc('global.default.close') }}
+        </mt-button>
+    </template>
+    {% endblock %}
+</sw-modal>
+{% endblock %}

@@ -1,0 +1,144 @@
+compatibility_date: '2026-02-11'
+store:
+    availabilities:
+        - German
+        - International
+    default_locale: en_GB
+    localizations:
+        - de_DE
+        - en_GB
+    categories:
+        - Administration
+    type: extension
+    icon: src/Resources/store/icon.png
+    automatic_bugfix_version_compatibility: true
+    description:
+        de: file:src/Resources/store/de.md
+        en: file:src/Resources/store/en.md
+    installation_manual:
+        de: file:src/Resources/store/de_manual.md
+        en: file:src/Resources/store/en_manual.md
+    tags:
+        de:
+            - Dashboard
+            - Widgets
+            - Statistiken
+            - Analyse
+        en:
+            - dashboard
+            - widgets
+            - statistics
+            - analytics
+    videos:
+        de: []
+        en: []
+    highlights:
+        de:
+            - Drag-and-drop Widget-Dashboard
+            - 12 Analyse-Diagramme
+            - Anordnung pro Benutzer gespeichert
+        en:
+            - Drag-and-drop widget dashboard
+            - 12 analytics charts
+            - Layout saved per user
+    features:
+        de:
+            - Modulares Widget-Board
+            - Analyse-Diagramme
+            - Neueste Bestellungen und Registrierungen
+            - B2B-Gruppenanfragen
+            - Offene Produktbewertungen
+            - Notizen und Aufgabenliste
+        en:
+            - Modular widget board
+            - Analytics charts
+            - Recent orders and registrations
+            - B2B group requests
+            - Pending product reviews
+            - Notes and task list
+    faq:
+        de: []
+        en: []
+    images:
+        # English captioned screenshots (activated for the en locale).
+        - file: src/Resources/store/img-0.png
+          activate:
+            de: false
+            en: true
+          preview:
+            de: false
+            en: true
+          priority: 0
+        - file: src/Resources/store/img-1.png
+          activate:
+            de: false
+            en: true
+          preview:
+            de: false
+            en: false
+          priority: 1
+        - file: src/Resources/store/img-2.png
+          activate:
+            de: false
+            en: true
+          preview:
+            de: false
+            en: false
+          priority: 2
+        - file: src/Resources/store/img-3.png
+          activate:
+            de: false
+            en: true
+          preview:
+            de: false
+            en: false
+          priority: 3
+        - file: src/Resources/store/img-4.png
+          activate:
+            de: false
+            en: true
+          preview:
+            de: false
+            en: false
+          priority: 4
+        # German captioned screenshots (activated for the de locale).
+        - file: src/Resources/store/img-de-0.png
+          activate:
+            de: true
+            en: false
+          preview:
+            de: true
+            en: false
+          priority: 0
+        - file: src/Resources/store/img-de-1.png
+          activate:
+            de: true
+            en: false
+          preview:
+            de: false
+            en: false
+          priority: 1
+        - file: src/Resources/store/img-de-2.png
+          activate:
+            de: true
+            en: false
+          preview:
+            de: false
+            en: false
+          priority: 2
+        - file: src/Resources/store/img-de-3.png
+          activate:
+            de: true
+            en: false
+          preview:
+            de: false
+            en: false
+          priority: 3
+        - file: src/Resources/store/img-de-4.png
+          activate:
+            de: true
+            en: false
+          preview:
+            de: false
+            en: false
+          priority: 4

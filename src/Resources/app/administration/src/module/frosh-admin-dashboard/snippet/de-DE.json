@@ -1,0 +1,199 @@
+{
+    "frosh-admin-dashboard": {
+        "general": {
+            "mainMenuItemGeneral": "Dashboard",
+            "descriptionTextModule": "Modulares Widget-Dashboard"
+        },
+        "grid": {
+            "customize": "Anpassen",
+            "done": "Fertig",
+            "addWidget": "Widget hinzufügen",
+            "editHint": "Ziehe Widgets, um sie neu anzuordnen. Nutze die Schaltflächen zum Vergrößern oder Entfernen.",
+            "empty": "Dein Dashboard ist leer. Füge dein erstes Widget hinzu, um zu starten."
+        },
+        "group": {
+            "analytics": "Analyse",
+            "productivity": "Produktivität",
+            "other": "Sonstiges"
+        },
+        "analytics": {
+            "salesChannel": "Verkaufskanal",
+            "salesChannelHelp": "Daten auf einen Verkaufskanal beschränken. Leer lassen für alle.",
+            "empty": "Keine Daten im gewählten Zeitraum.",
+            "range": {
+                "30Days": "Letzte 30 Tage",
+                "14Days": "Letzte 14 Tage",
+                "7Days": "Letzte 7 Tage",
+                "yesterday": "Gestern"
+            }
+        },
+        "size": {
+            "small": "Klein",
+            "medium": "Mittel",
+            "large": "Groß",
+            "full": "Volle Breite"
+        },
+        "settingsModal": {
+            "title": "Einstellungen: { widget }",
+            "empty": "Dieses Widget hat keine Einstellungen."
+        },
+        "widget": {
+            "resize": "Größe ändern",
+            "remove": "Entfernen",
+            "configure": "Konfigurieren",
+            "unknown": "Unbekanntes Widget \"{ id }\". Das bereitstellende Plugin ist möglicherweise deaktiviert.",
+            "noAccess": "Fehlende Berechtigungen",
+            "missingPrivileges": "Dir fehlen folgende Berechtigungen: { privileges }",
+            "statistics": {
+                "label": "Bestellstatistik",
+                "description": "Heutige Bestellungen, Umsatz und Trend-Diagramme."
+            },
+            "totalSales": {
+                "label": "Gesamtumsatz",
+                "description": "Gesamter Bestellwert im Zeitverlauf.",
+                "seriesName": "Gesamtumsatz"
+            },
+            "numberOfOrder": {
+                "label": "Anzahl Bestellungen",
+                "description": "Anzahl der Bestellungen im Zeitverlauf.",
+                "seriesName": "Bestellungen"
+            },
+            "averageOrderValue": {
+                "label": "Durchschnittlicher Bestellwert",
+                "description": "Durchschnittlicher Bestellwert im Zeitverlauf.",
+                "seriesName": "Ø Bestellwert"
+            },
+            "newCustomer": {
+                "label": "Neue Kunden",
+                "description": "Neue Kundenregistrierungen im Zeitverlauf.",
+                "seriesName": "Neue Kunden"
+            },
+            "numberOfCustomer": {
+                "label": "Kunden gesamt",
+                "description": "Kumulierte Anzahl der Kunden im Zeitverlauf.",
+                "seriesName": "Kunden"
+            },
+            "bestSellingProduct": {
+                "label": "Bestseller-Produkte",
+                "description": "Top-Produkte nach verkaufter Menge."
+            },
+            "manufacturer": {
+                "label": "Top-Hersteller",
+                "description": "Verkaufte Menge je Hersteller."
+            },
+            "country": {
+                "label": "Bestellungen nach Land",
+                "description": "Anzahl Bestellungen je Rechnungsland."
+            },
+            "paymentMethod": {
+                "label": "Zahlungsarten",
+                "description": "Nutzungsanteil der Zahlungsarten."
+            },
+            "shippingMethod": {
+                "label": "Versandarten",
+                "description": "Nutzungsanteil der Versandarten."
+            },
+            "salesChannelSales": {
+                "label": "Umsatz nach Kanal",
+                "description": "Gesamtumsatz je Verkaufskanal."
+            },
+            "promotionCode": {
+                "label": "Top-Aktionscodes",
+                "description": "Meistgenutzte Aktionscodes nach Bestellanzahl."
+            },
+            "orders": {
+                "label": "Bestellungen",
+                "description": "Heutige Bestellungen und das Bestellungs-Trenddiagramm."
+            },
+            "turnover": {
+                "label": "Umsatz",
+                "description": "Heutiger Umsatz und das Umsatz-Trenddiagramm."
+            },
+            "recentOrders": {
+                "label": "Neueste Bestellungen",
+                "description": "Die letzten Bestellungen auf einen Blick.",
+                "salesChannel": "Verkaufskanal",
+                "salesChannelHelp": "Liste auf einen Verkaufskanal beschränken. Leer lassen, um alle anzuzeigen.",
+                "limit": "Anzahl der Bestellungen",
+                "noAccess": "Du hast keine Berechtigung, Bestellungen anzuzeigen.",
+                "empty": "Keine Bestellungen gefunden."
+            },
+            "recentCustomers": {
+                "label": "Neueste Registrierungen",
+                "description": "Die letzten Kundenregistrierungen auf einen Blick.",
+                "columnSalesChannel": "Verkaufskanal",
+                "salesChannel": "Verkaufskanal",
+                "salesChannelHelp": "Liste auf einen Verkaufskanal beschränken. Leer lassen, um alle anzuzeigen.",
+                "limit": "Anzahl der Kunden",
+                "noAccess": "Du hast keine Berechtigung, Kunden anzuzeigen.",
+                "empty": "Keine Kunden gefunden."
+            },
+            "groupRequests": {
+                "label": "B2B-Gruppenanfragen",
+                "description": "Kunden, die Zugang zu einer anderen Kundengruppe anfragen – mit Annehmen-/Ablehnen-Aktionen.",
+                "columnCurrentGroup": "Aktuelle Gruppe",
+                "columnRequestedGroup": "Angefragte Gruppe",
+                "salesChannel": "Verkaufskanal",
+                "salesChannelHelp": "Liste auf einen Verkaufskanal beschränken. Leer lassen, um alle anzuzeigen.",
+                "limit": "Anzahl der Anfragen",
+                "accept": "Annehmen",
+                "decline": "Ablehnen",
+                "acceptSuccess": "Die Gruppenanfrage wurde angenommen.",
+                "declineSuccess": "Die Gruppenanfrage wurde abgelehnt.",
+                "error": "Die Gruppenanfrage konnte nicht verarbeitet werden.",
+                "noAccess": "Du hast keine Berechtigung, Kunden anzuzeigen.",
+                "empty": "Keine offenen Gruppenanfragen."
+            },
+            "pendingReviews": {
+                "label": "Offene Bewertungen",
+                "description": "Produktbewertungen, die auf Freigabe warten – mit Freigeben-/Ablehnen-Aktionen.",
+                "salesChannel": "Verkaufskanal",
+                "salesChannelHelp": "Liste auf einen Verkaufskanal beschränken. Leer lassen, um alle anzuzeigen.",
+                "limit": "Anzahl der Bewertungen",
+                "approve": "Freigeben",
+                "decline": "Ablehnen",
+                "approveSuccess": "Die Bewertung wurde freigegeben.",
+                "declineSuccess": "Die Bewertung wurde gelöscht.",
+                "error": "Die Bewertung konnte nicht verarbeitet werden.",
+                "deleteModalTitle": "Bewertung löschen",
+                "deleteModalText": "Beim Ablehnen wird die Bewertung \"{ title }\" dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",
+                "deleteConfirm": "Löschen",
+                "noAccess": "Du hast keine Berechtigung, Bewertungen anzuzeigen.",
+                "empty": "Keine Bewertungen warten auf Freigabe."
+            },
+            "quickLinks": {
+                "label": "Schnellzugriffe",
+                "description": "Verknüpfungen zu den meistgenutzten Bereichen.",
+                "products": "Produkte",
+                "orders": "Bestellungen",
+                "customers": "Kunden",
+                "categories": "Kategorien",
+                "settings": "Einstellungen"
+            },
+            "notes": {
+                "label": "Notizen",
+                "description": "Ein persönlicher Notizblock.",
+                "placeholder": "Notiz schreiben…",
+                "accent": "Akzentfarbe"
+            },
+            "tasks": {
+                "label": "Aufgabenliste",
+                "description": "Eine persönliche To-do-Liste.",
+                "placeholder": "Aufgabe hinzufügen…",
+                "remove": "Aufgabe entfernen",
+                "hideCompleted": "Erledigte Aufgaben ausblenden",
+                "empty": "Noch keine Aufgaben. Füge oben deine erste hinzu.",
+                "openCount": "{count} offene Aufgabe | {count} offene Aufgaben"
+            }
+        },
+        "addModal": {
+            "title": "Widget hinzufügen",
+            "empty": "Keine weiteren Widgets verfügbar.",
+            "noAccess": "Fehlende Berechtigungen",
+            "missingPrivileges": "Dir fehlen folgende Berechtigungen: { privileges }"
+        },
+        "notification": {
+            "saveError": "Das Dashboard-Layout konnte nicht gespeichert werden."
+        }
+    }
+}
