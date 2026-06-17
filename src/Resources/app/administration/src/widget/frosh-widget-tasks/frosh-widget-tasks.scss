@@ -45,6 +45,35 @@
         overflow-wrap: anywhere;
     }
 
+    &__edit-input {
+        flex: 1 1 auto;
+
+        input {
+            font-size: var(--font-size-s, 14px);
+        }
+    }
+
+    &__edit {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        border-radius: var(--border-radius-default, 4px);
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-icon-primary-default, #758ca3);
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+
+        &:hover {
+            color: var(--color-icon-primary-default, #52667a);
+        }
+    }
+
     &__remove {
         flex: 0 0 auto;
         display: inline-flex;
@@ -66,6 +95,7 @@
         }
     }
 
+    &__item:hover &__edit,
     &__item:hover &__remove {
         opacity: 1;
     }

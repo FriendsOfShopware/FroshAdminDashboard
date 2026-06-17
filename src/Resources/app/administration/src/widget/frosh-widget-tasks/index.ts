@@ -31,11 +31,13 @@ export default Shopware.Component.wrapComponentConfig({
         },
     },
 
-    data(): { tasks: Task[]; newTask: string } {
+    data(): { tasks: Task[]; newTask: string; editingId: string | null; editText: string } {
         return {
             // Local working copy seeded from the persisted settings.
             tasks: Array.isArray(this.settings.tasks) ? this.settings.tasks.map((task) => ({ ...task })) : [],
             newTask: '',
+            editingId: null,
+            editText: '',
         };
     },
 
@@ -77,6 +79,33 @@ export default Shopware.Component.wrapComponentConfig({
         onRemove(taskId: string): void {
             this.tasks = this.tasks.filter((task) => task.id !== taskId);
             this.persist();
+        },
+
+        onStartEdit(task: Task): void {
+            this.editingId = task.id;
+            this.editText = task.text;
+            this.$nextTick(() => {
+                const input = this.$el.querySelector('.frosh-widget-tasks__edit-input input');
+                if (input) {
+                    (input as HTMLInputElement).focus();
+                    (input as HTMLInputElement).select();
+                }
+            });
+        },
+
+        onSaveEdit(task: Task): void {
+            const text = this.editText.trim();
+            if (text) {
+                task.text = text;
+            }
+            this.editingId = null;
+            this.editText = '';
+            this.persist();
+        },
+
+        onCancelEdit(): void {
+            this.editingId = null;
+            this.editText = '';
         },
     },
 });

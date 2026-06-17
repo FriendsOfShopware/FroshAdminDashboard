@@ -180,6 +180,7 @@
                 "label": "Aufgabenliste",
                 "description": "Eine persönliche To-do-Liste.",
                 "placeholder": "Aufgabe hinzufügen…",
+                "edit": "Aufgabe bearbeiten",
                 "remove": "Aufgabe entfernen",
                 "hideCompleted": "Erledigte Aufgaben ausblenden",
                 "empty": "Noch keine Aufgaben. Füge oben deine erste hinzu.",
