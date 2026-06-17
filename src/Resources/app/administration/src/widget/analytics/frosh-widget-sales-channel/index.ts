@@ -2,13 +2,13 @@ import template from './frosh-widget-sales-channel.html.twig';
 import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { BreakdownRow } from '../_base/frosh-analytics-breakdown';
-import { baseOrderCriteria, currencyAggregation, dateRangeFilter, mapCurrencyFactors } from '../_common/order-criteria';
+import { baseOrderCriteria, dateRangeFilter, parseCurrencyFactor } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
 interface ChannelBucket {
     key: string;
-    currencyGroup?: { buckets: Array<{ key: string; sumAmount?: { sum: number } }> };
+    currencyFactorGroup?: { buckets: Array<{ key: string | number; sumAmount?: { sum: number } }> };
 }
 
 /** Sales per sales channel (currency-normalised). */
@@ -30,7 +30,7 @@ export default Shopware.Component.wrapComponentConfig({
             return Shopware.Filter.getByName('currency');
         },
         systemCurrencyISOCode(): string {
-            return Shopware.Store.get('session')?.currency?.isoCode ?? 'EUR';
+            return Shopware.Context.app.systemCurrencyISOCode ?? 'EUR';
         },
     },
 
@@ -44,25 +44,29 @@ export default Shopware.Component.wrapComponentConfig({
             const criteria = baseOrderCriteria(salesChannelId);
             criteria
                 .addFilter(dateRangeFilter(fromDate, toDate))
-                .addAggregation(currencyAggregation())
                 .addAggregation(
                     Criteria.terms(
                         'salesChannelSales',
                         'salesChannelId',
                         null,
                         null,
-                        Criteria.terms('currencyGroup', 'currencyId', null, null, Criteria.sum('sumAmount', 'amountTotal')),
+                        Criteria.terms(
+                            'currencyFactorGroup',
+                            'currencyFactor',
+                            null,
+                            null,
+                            Criteria.sum('sumAmount', 'amountTotal'),
+                        ),
                     ),
                 );
 
             const result = await this.repositoryFactory.create('order').search(criteria, Shopware.Context.api);
             const aggregations = result?.aggregations ?? {};
-            const factors = mapCurrencyFactors(aggregations.currencies?.entities ?? []);
 
             const totalById: Record<string, number> = {};
             ((aggregations.salesChannelSales?.buckets ?? []) as ChannelBucket[]).forEach((channelBucket) => {
-                const channelTotal = (channelBucket.currencyGroup?.buckets ?? []).reduce((sum, currencyBucket) => {
-                    const factor = factors[currencyBucket.key];
+                const channelTotal = (channelBucket.currencyFactorGroup?.buckets ?? []).reduce((sum, currencyBucket) => {
+                    const factor = parseCurrencyFactor(currencyBucket.key);
                     return factor ? sum + (currencyBucket.sumAmount?.sum ?? 0) / factor : sum;
                 }, 0);
                 totalById[channelBucket.key] = channelTotal;

@@ -71,12 +71,19 @@ export default Shopware.Component.wrapComponentConfig({
         },
     },
 
-    data(): { series: SeriesPoint[]; summary: number; isLoading: boolean; selectedRange: string } {
+    data(): {
+        series: SeriesPoint[];
+        summary: number;
+        isLoading: boolean;
+        selectedRange: string;
+        currentRangeDates: { fromDate: Date; toDate: Date; interval: Interval } | null;
+        } {
         return {
             series: [],
             summary: 0,
             isLoading: true,
             selectedRange: '30Days',
+            currentRangeDates: null,
         };
     },
 
@@ -98,7 +105,7 @@ export default Shopware.Component.wrapComponentConfig({
         },
 
         systemCurrencyISOCode(): string {
-            return Shopware.Store.get('session')?.currency?.isoCode ?? 'EUR';
+            return Shopware.Context.app.systemCurrencyISOCode ?? 'EUR';
         },
 
         formattedSummary(): string {
@@ -108,10 +115,21 @@ export default Shopware.Component.wrapComponentConfig({
             return new Intl.NumberFormat().format(Math.round(this.summary * 100) / 100);
         },
 
+        fillEmptyValues(): 'hour' | 'day' {
+            return this.currentRangeDates?.interval.interval === 'hour' ? 'hour' : 'day';
+        },
+
         chartOptions(): Record<string, unknown> {
             return {
-                xaxis: { type: 'datetime' },
+                xaxis: {
+                    type: 'datetime',
+                    min: this.currentRangeDates?.fromDate.getTime(),
+                    labels: {
+                        datetimeUTC: false,
+                    },
+                },
                 yaxis: {
+                    min: 0,
                     labels: {
                         formatter: (value: number) =>
                             this.valueFormat === 'money'
@@ -146,6 +164,7 @@ export default Shopware.Component.wrapComponentConfig({
 
             this.isLoading = true;
             const { fromDate, toDate, interval } = this.rangeDates(this.selectedRange);
+            this.currentRangeDates = { fromDate, toDate, interval };
 
             try {
                 const result = await this.fetcher(fromDate, toDate, interval, this.salesChannelId);

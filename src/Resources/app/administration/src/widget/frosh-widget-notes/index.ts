@@ -34,18 +34,27 @@ export default Shopware.Component.wrapComponentConfig({
     },
 
     beforeUnmount() {
-        if (this.debounce !== null) {
-            window.clearTimeout(this.debounce);
-        }
+        this.flushPendingSave();
     },
 
     methods: {
+        flushPendingSave(): void {
+            if (this.debounce === null) {
+                return;
+            }
+
+            window.clearTimeout(this.debounce);
+            this.debounce = null;
+            this.$emit('update-settings', { text: this.text });
+        },
+
         onInput(): void {
             if (this.debounce !== null) {
                 window.clearTimeout(this.debounce);
             }
 
             this.debounce = window.setTimeout(() => {
+                this.debounce = null;
                 this.$emit('update-settings', { text: this.text });
             }, 600);
         },

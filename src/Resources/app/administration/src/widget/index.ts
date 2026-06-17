@@ -17,7 +17,8 @@ const { Component } = Shopware;
 // Built-in groups shown as sections in the "Add widget" picker. Plugins may add
 // more via `Shopware.FroshDashboard.registerGroup`.
 widgetRegistry.registerGroup({ id: 'analytics', label: 'frosh-admin-dashboard.group.analytics', position: 10 });
-widgetRegistry.registerGroup({ id: 'productivity', label: 'frosh-admin-dashboard.group.productivity', position: 20 });
+widgetRegistry.registerGroup({ id: 'operations', label: 'frosh-admin-dashboard.group.operations', position: 20 });
+widgetRegistry.registerGroup({ id: 'productivity', label: 'frosh-admin-dashboard.group.productivity', position: 30 });
 
 Component.register('frosh-widget-notes', () => import('./frosh-widget-notes'));
 Component.register('frosh-widget-tasks', () => import('./frosh-widget-tasks'));
@@ -81,7 +82,7 @@ widgetRegistry.registerWidget({
     component: 'frosh-widget-recent-orders',
     defaultSize: 'large',
     supportedSizes: ['medium', 'large', 'full'],
-    group: 'analytics',
+    group: 'operations',
     acl: ['order.viewer'],
     settings: [
         {
@@ -115,7 +116,7 @@ widgetRegistry.registerWidget({
     component: 'frosh-widget-recent-customers',
     defaultSize: 'large',
     supportedSizes: ['medium', 'large', 'full'],
-    group: 'analytics',
+    group: 'operations',
     acl: ['customer.viewer'],
     settings: [
         {
@@ -149,7 +150,7 @@ widgetRegistry.registerWidget({
     component: 'frosh-widget-group-requests',
     defaultSize: 'large',
     supportedSizes: ['medium', 'large', 'full'],
-    group: 'analytics',
+    group: 'operations',
     acl: ['customer.viewer'],
     settings: [
         {
@@ -183,7 +184,7 @@ widgetRegistry.registerWidget({
     component: 'frosh-widget-pending-reviews',
     defaultSize: 'large',
     supportedSizes: ['medium', 'large', 'full'],
-    group: 'analytics',
+    group: 'operations',
     acl: ['review.viewer'],
     settings: [
         {

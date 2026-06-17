@@ -35,7 +35,8 @@ export default Shopware.Component.wrapComponentConfig({
             const criteria = baseOrderCriteria(salesChannelId);
             criteria
                 .addFilter(dateRangeFilter(fromDate, toDate))
-                .addAggregation(Criteria.terms('shippingMethodCount', 'deliveries.shippingMethodId', null, null, null));
+                .addFilter(Criteria.not('AND', [Criteria.equals('primaryOrderDelivery.shippingMethodId', null)]))
+                .addAggregation(Criteria.terms('shippingMethodCount', 'primaryOrderDelivery.shippingMethodId', null, null, null));
 
             const result = await this.repositoryFactory.create('order').search(criteria, Shopware.Context.api);
             const buckets = (result?.aggregations?.shippingMethodCount?.buckets ?? []) as CountBucket[];

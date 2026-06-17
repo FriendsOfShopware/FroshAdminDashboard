@@ -5,10 +5,11 @@
 // Requires a Chrome started with --remote-debugging-port=9222.
 import { chromium } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const STORE =
-    process.env.STORE_DIR ||
-    '/Users/shyim/Developer/sw-trunk/custom/plugins/FroshAdminDashboard/src/Resources/store';
+const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+const STORE = process.env.STORE_DIR || resolve(SCRIPT_DIR, '../src/Resources/store');
 const W = 1600;
 const H = 1000;
 
@@ -119,7 +120,7 @@ const html = (slide) => `<!doctype html><html><head><meta charset="utf-8">
     <div class="eyebrow">${slide.eyebrow}</div>
     <div class="title">${slide.title}</div>
     <div class="subtitle">${slide.subtitle}</div>
-    <div class="shot"><img src="${dataUrl(`${STORE}/${slide.src}`)}"></div>
+    <div class="shot"><img src="${dataUrl(join(STORE, slide.src))}"></div>
   </div>
 </body></html>`;
 
@@ -142,7 +143,7 @@ for (const locale of locales) {
         const out = `${set.prefix}-${i}.png`;
         await page.setContent(html(slide), { waitUntil: 'networkidle' });
         await page.waitForTimeout(600);
-        await page.screenshot({ path: `${STORE}/${out}`, clip: { x: 0, y: 0, width: W, height: H } });
+        await page.screenshot({ path: join(STORE, out), clip: { x: 0, y: 0, width: W, height: H } });
         console.log('rendered', out);
     }
 }

@@ -35,7 +35,8 @@ export default Shopware.Component.wrapComponentConfig({
             const criteria = baseOrderCriteria(salesChannelId);
             criteria
                 .addFilter(dateRangeFilter(fromDate, toDate))
-                .addAggregation(Criteria.terms('paymentCount', 'transactions.paymentMethodId', null, null, null));
+                .addFilter(Criteria.not('AND', [Criteria.equals('primaryOrderTransaction.paymentMethodId', null)]))
+                .addAggregation(Criteria.terms('paymentCount', 'primaryOrderTransaction.paymentMethodId', null, null, null));
 
             const result = await this.repositoryFactory.create('order').search(criteria, Shopware.Context.api);
             const buckets = (result?.aggregations?.paymentCount?.buckets ?? []) as CountBucket[];

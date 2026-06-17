@@ -6,7 +6,7 @@
  * with the key below; the value is the JSON encoded list of placed widgets.
  */
 
-import type { WidgetSize } from './widget-registry';
+import { ALL_SIZES, type WidgetSize } from './widget-registry';
 
 export const LAYOUT_CONFIG_KEY = 'frosh-admin-dashboard.layout';
 
@@ -30,6 +30,14 @@ interface UserConfigServiceLike {
     upsert(data: Record<string, unknown>): Promise<void>;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function isWidgetSize(value: unknown): value is WidgetSize {
+    return typeof value === 'string' && (ALL_SIZES as string[]).includes(value);
+}
+
 export default class DashboardLayoutService {
     private readonly userConfigService: UserConfigServiceLike;
 
@@ -46,16 +54,29 @@ export default class DashboardLayoutService {
             return null;
         }
 
-        return value
-            .filter((entry): entry is PlacedWidget => {
-                return Boolean(entry) && typeof entry === 'object' && typeof (entry as PlacedWidget).widgetId === 'string';
-            })
-            .map((entry) => ({
-                uid: entry.uid,
+        const seenUids = new Set<string>();
+
+        return value.reduce<PlacedWidget[]>((layout, entry) => {
+            if (!isRecord(entry) || typeof entry.widgetId !== 'string' || entry.widgetId.length === 0) {
+                return layout;
+            }
+
+            const storedUid = typeof entry.uid === 'string' && entry.uid.length > 0 ? entry.uid : null;
+            const uid = storedUid && !seenUids.has(storedUid)
+                ? storedUid
+                : `${entry.widgetId}-${Shopware.Utils.createId()}`;
+
+            seenUids.add(uid);
+
+            layout.push({
+                uid,
                 widgetId: entry.widgetId,
-                size: entry.size ?? 'medium',
-                settings: entry.settings ?? {},
-            }));
+                size: isWidgetSize(entry.size) ? entry.size : 'medium',
+                settings: isRecord(entry.settings) ? entry.settings : {},
+            });
+
+            return layout;
+        }, []);
     }
 
     async save(layout: PlacedWidget[]): Promise<void> {

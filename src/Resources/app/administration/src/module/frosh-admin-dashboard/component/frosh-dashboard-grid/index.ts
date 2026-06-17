@@ -23,6 +23,7 @@ export default Shopware.Component.wrapComponentConfig({
         isLoading: boolean;
         isEditing: boolean;
         isSaving: boolean;
+        hasPendingSave: boolean;
         draggedUid: string | null;
         dragOverUid: string | null;
         showAddModal: boolean;
@@ -33,6 +34,7 @@ export default Shopware.Component.wrapComponentConfig({
             isLoading: true,
             isEditing: false,
             isSaving: false,
+            hasPendingSave: false,
             draggedUid: null,
             dragOverUid: null,
             showAddModal: false,
@@ -216,7 +218,8 @@ export default Shopware.Component.wrapComponentConfig({
 
             const next = [...this.layout];
             const [moved] = next.splice(fromIndex, 1);
-            next.splice(toIndex, 0, moved);
+            const insertIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
+            next.splice(insertIndex, 0, moved);
             this.layout = next;
 
             this.resetDragState();
@@ -234,16 +237,36 @@ export default Shopware.Component.wrapComponentConfig({
 
         // --- persistence -------------------------------------------------------
 
+        copyLayout(): PlacedWidget[] {
+            return this.layout.map((placed) => ({
+                uid: placed.uid,
+                widgetId: placed.widgetId,
+                size: placed.size,
+                settings: { ...placed.settings },
+            }));
+        },
+
         async persist(): Promise<void> {
+            if (this.isSaving) {
+                this.hasPendingSave = true;
+                return;
+            }
+
             this.isSaving = true;
             try {
-                await this.froshDashboardLayoutService.save(this.layout);
+                do {
+                    this.hasPendingSave = false;
+                    await this.froshDashboardLayoutService.save(this.copyLayout());
+                } while (this.hasPendingSave);
             } catch {
                 this.createNotificationError({
                     message: this.$tc('frosh-admin-dashboard.notification.saveError'),
                 });
             } finally {
                 this.isSaving = false;
+                if (this.hasPendingSave) {
+                    void this.persist();
+                }
             }
         },
     },

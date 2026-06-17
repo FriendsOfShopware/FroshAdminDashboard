@@ -71,11 +71,6 @@ export default Shopware.Component.wrapComponentConfig({
             this.persist();
         },
 
-        onToggle(task: Task): void {
-            task.done = !task.done;
-            this.persist();
-        },
-
         onRemove(taskId: string): void {
             this.tasks = this.tasks.filter((task) => task.id !== taskId);
             this.persist();

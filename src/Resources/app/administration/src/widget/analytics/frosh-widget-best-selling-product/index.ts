@@ -2,16 +2,13 @@ import template from './frosh-widget-best-selling-product.html.twig';
 import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { BreakdownRow } from '../_base/frosh-analytics-breakdown';
+import { toStorageDateTime } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
 interface SumBucket {
     key: string;
     quantitySum?: { sum: number };
-}
-
-function toStorageDate(date: Date): string {
-    return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
 
 /** Best-selling products by sold quantity. */
@@ -40,7 +37,7 @@ export default Shopware.Component.wrapComponentConfig({
             criteria.addFilter(Criteria.equals('type', 'product'));
             criteria.addFilter(Criteria.not('AND', [Criteria.equals('productId', null)]));
             criteria.addFilter(
-                Criteria.range('order.orderDate', { gte: toStorageDate(fromDate), lte: toStorageDate(toDate) }),
+                Criteria.range('order.orderDateTime', { gte: toStorageDateTime(fromDate), lte: toStorageDateTime(toDate) }),
             );
 
             if (salesChannelId) {
@@ -48,7 +45,7 @@ export default Shopware.Component.wrapComponentConfig({
             }
 
             criteria.addAggregation(
-                Criteria.terms('products', 'productId', 10, Criteria.sort('quantitySum', 'DESC'), Criteria.sum('quantitySum', 'quantity')),
+                Criteria.terms('products', 'productId', null, null, Criteria.sum('quantitySum', 'quantity')),
             );
 
             const result = await this.repositoryFactory.create('order_line_item').search(criteria, Shopware.Context.api);
@@ -61,7 +58,11 @@ export default Shopware.Component.wrapComponentConfig({
                 }
             });
 
-            const ids = Object.keys(qtyById);
+            const ids = Object.entries(qtyById)
+                .sort(([, left], [, right]) => right - left)
+                .slice(0, 10)
+                .map(([id]) => id);
+
             if (!ids.length) {
                 return [];
             }

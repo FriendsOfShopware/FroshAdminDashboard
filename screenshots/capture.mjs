@@ -1,11 +1,11 @@
 // Captures store screenshots of the FroshAdminDashboard plugin.
 // Usage: APP_URL=http://sw-trunk.localhost node screenshots/capture.mjs
 import { chromium } from '@playwright/test';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const STORE_DIR =
-    process.env.STORE_DIR ||
-    '/Users/shyim/Developer/sw-trunk/custom/plugins/FroshAdminDashboard/src/Resources/store';
+const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+const STORE_DIR = process.env.STORE_DIR || resolve(SCRIPT_DIR, '../src/Resources/store');
 
 const APP_URL = process.env.APP_URL || 'http://sw-trunk.localhost';
 const USER = process.env.ADMIN_USER || 'admin';

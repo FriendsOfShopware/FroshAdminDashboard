@@ -5,17 +5,16 @@ import type { SeriesPoint, TimeseriesResult } from '../_base/frosh-analytics-tim
 import { parseBucketDate } from '../_common/series';
 import {
     baseOrderCriteria,
-    currencyAggregation,
     dateRangeFilter,
-    groupedByCurrencyHistogram,
+    groupedByCurrencyFactorHistogram,
     groupedByDateHistogram,
-    mapCurrencyFactors,
+    parseCurrencyFactor,
 } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
 interface CurrencyBucket {
-    key: string;
+    key: string | number;
     orderDate?: { buckets: Array<{ key: string; sumAmount?: { sum: number } }> };
 }
 interface CountBucket {
@@ -50,21 +49,19 @@ export default Shopware.Component.wrapComponentConfig({
             const criteria = baseOrderCriteria(salesChannelId);
             criteria
                 .addFilter(dateRangeFilter(fromDate, toDate))
-                .addAggregation(currencyAggregation())
                 .addAggregation(
-                    groupedByCurrencyHistogram(interval, Criteria.sum('sumAmount', 'amountTotal'), 'sumGroupedByCurrency'),
+                    groupedByCurrencyFactorHistogram(interval, Criteria.sum('sumAmount', 'amountTotal'), 'sumGroupedByCurrencyFactor'),
                 )
                 .addAggregation(groupedByDateHistogram(interval, Criteria.count('countAgg', 'id')));
 
             const result = await this.repositoryFactory.create('order').search(criteria, Shopware.Context.api);
             const aggregations = result?.aggregations ?? {};
 
-            const factors = mapCurrencyFactors(aggregations.currencies?.entities ?? []);
             const sumByDate: Record<string, number> = {};
             const countByDate: Record<string, number> = {};
 
-            ((aggregations.sumGroupedByCurrency?.buckets ?? []) as CurrencyBucket[]).forEach((currencyBucket) => {
-                const factor = factors[currencyBucket.key];
+            ((aggregations.sumGroupedByCurrencyFactor?.buckets ?? []) as CurrencyBucket[]).forEach((currencyBucket) => {
+                const factor = parseCurrencyFactor(currencyBucket.key);
                 if (!factor) {
                     return;
                 }

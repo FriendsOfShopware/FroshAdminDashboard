@@ -13,6 +13,7 @@
         },
         "group": {
             "analytics": "Analytics",
+            "operations": "Operations",
             "productivity": "Productivity",
             "other": "Other"
         },
@@ -184,7 +185,7 @@
                 "remove": "Remove task",
                 "hideCompleted": "Hide completed tasks",
                 "empty": "No tasks yet. Add your first one above.",
-                "openCount": "{count} task open | {count} tasks open"
+                "openCount": "{n} task open | {n} tasks open"
             }
         },
         "addModal": {

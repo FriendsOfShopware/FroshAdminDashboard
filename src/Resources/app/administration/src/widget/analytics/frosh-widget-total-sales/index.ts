@@ -5,16 +5,15 @@ import type { SeriesPoint, TimeseriesResult } from '../_base/frosh-analytics-tim
 import { parseBucketDate } from '../_common/series';
 import {
     baseOrderCriteria,
-    currencyAggregation,
     dateRangeFilter,
-    groupedByCurrencyHistogram,
-    mapCurrencyFactors,
+    groupedByCurrencyFactorHistogram,
+    parseCurrencyFactor,
 } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
 interface CurrencyBucket {
-    key: string;
+    key: string | number;
     orderDate?: { buckets: Array<{ key: string; sumAmount?: { sum: number } }> };
 }
 
@@ -42,20 +41,18 @@ export default Shopware.Component.wrapComponentConfig({
             const criteria = baseOrderCriteria(salesChannelId);
             criteria
                 .addFilter(dateRangeFilter(fromDate, toDate))
-                .addAggregation(currencyAggregation())
                 .addAggregation(
-                    groupedByCurrencyHistogram(interval, Criteria.sum('sumAmount', 'amountTotal'), 'groupedByCurrency'),
+                    groupedByCurrencyFactorHistogram(interval, Criteria.sum('sumAmount', 'amountTotal'), 'groupedByCurrencyFactor'),
                 );
 
             const result = await this.repositoryFactory.create('order').search(criteria, Shopware.Context.api);
             const aggregations = result?.aggregations ?? {};
 
-            const factors = mapCurrencyFactors(aggregations.currencies?.entities ?? []);
             const detail: Record<string, number> = {};
             let summary = 0;
 
-            ((aggregations.groupedByCurrency?.buckets ?? []) as CurrencyBucket[]).forEach((currencyBucket) => {
-                const factor = factors[currencyBucket.key];
+            ((aggregations.groupedByCurrencyFactor?.buckets ?? []) as CurrencyBucket[]).forEach((currencyBucket) => {
+                const factor = parseCurrencyFactor(currencyBucket.key);
                 if (!factor) {
                     return;
                 }

@@ -29,9 +29,9 @@
             :class="{ 'is--done': task.done }"
         >
             <mt-checkbox
-                :checked="task.done"
+                v-model:checked="task.done"
                 class="frosh-widget-tasks__check"
-                @update:checked="onToggle(task)"
+                @update:checked="persist"
             />
             <template v-if="editingId === task.id">
                 <mt-text-field
@@ -73,7 +73,7 @@
 
     {% block frosh_widget_tasks_footer %}
     <div v-if="tasks.length" class="frosh-widget-tasks__footer">
-        {{ $tc('frosh-admin-dashboard.widget.tasks.openCount', openCount, { count: openCount }) }}
+        {{ $tc('frosh-admin-dashboard.widget.tasks.openCount', openCount) }}
     </div>
     {% endblock %}
 </div>

@@ -19,6 +19,15 @@ function toStorageDate(date: Date): string {
         : new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
 
+/** Date-only fields must receive date-only values or the first day can be excluded. */
+export function toStorageDateOnly(date: Date): string {
+    return format.toISODate(date, false);
+}
+
+export function toStorageDateTime(date: Date): string {
+    return toStorageDate(date);
+}
+
 export function baseOrderCriteria(salesChannelId?: string | null): InstanceType<typeof Criteria> {
     const criteria = new Criteria(1, 1);
     criteria.setTotalCountMode(0);
@@ -32,13 +41,9 @@ export function baseOrderCriteria(salesChannelId?: string | null): InstanceType<
 
 export function dateRangeFilter(fromDate: Date, toDate: Date): ReturnType<typeof Criteria.range> {
     return Criteria.range('orderDate', {
-        gte: toStorageDate(fromDate),
-        lte: toStorageDate(toDate),
+        gte: toStorageDateOnly(fromDate),
+        lte: toStorageDateOnly(toDate),
     });
-}
-
-export function currencyAggregation(): ReturnType<typeof Criteria.entityAggregation> {
-    return Criteria.entityAggregation('currencies', 'currencyId', 'currency');
 }
 
 /** Histogram over the order date, with a nested aggregation. */
@@ -53,15 +58,15 @@ export function groupedByDateHistogram(interval: Interval, nested: Aggregation):
     );
 }
 
-/** Terms(currencyId) → histogram(date) → nested, used to normalise multi-currency sums. */
-export function groupedByCurrencyHistogram(
+/** Terms(currencyFactor) -> histogram(date) -> nested, used to normalise multi-currency sums. */
+export function groupedByCurrencyFactorHistogram(
     interval: Interval,
     nested: Aggregation,
     bucketName: string,
 ): ReturnType<typeof Criteria.terms> {
     return Criteria.terms(
         bucketName,
-        'currencyId',
+        'currencyFactor',
         null,
         null,
         Criteria.histogram(
@@ -75,9 +80,8 @@ export function groupedByCurrencyHistogram(
     );
 }
 
-export function mapCurrencyFactors(currencies: Array<{ id: string; factor: number }>): Record<string, number> {
-    return currencies.reduce<Record<string, number>>((mapped, currency) => {
-        mapped[currency.id] = currency.factor;
-        return mapped;
-    }, {});
+export function parseCurrencyFactor(value: string | number): number | null {
+    const factor = Number(value);
+
+    return Number.isFinite(factor) && factor > 0 ? factor : null;
 }

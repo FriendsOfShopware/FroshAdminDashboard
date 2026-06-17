@@ -13,6 +13,7 @@
         },
         "group": {
             "analytics": "Analyse",
+            "operations": "Betrieb",
             "productivity": "Produktivität",
             "other": "Sonstiges"
         },
@@ -184,7 +185,7 @@
                 "remove": "Aufgabe entfernen",
                 "hideCompleted": "Erledigte Aufgaben ausblenden",
                 "empty": "Noch keine Aufgaben. Füge oben deine erste hinzu.",
-                "openCount": "{count} offene Aufgabe | {count} offene Aufgaben"
+                "openCount": "{n} offene Aufgabe | {n} offene Aufgaben"
             }
         },
         "addModal": {
