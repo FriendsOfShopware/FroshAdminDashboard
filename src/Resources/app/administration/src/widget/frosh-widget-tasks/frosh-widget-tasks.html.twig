@@ -33,7 +33,26 @@
                 class="frosh-widget-tasks__check"
                 @update:checked="onToggle(task)"
             />
-            <span class="frosh-widget-tasks__text">{{ task.text }}</span>
+            <template v-if="editingId === task.id">
+                <mt-text-field
+                    v-model="editText"
+                    class="frosh-widget-tasks__edit-input"
+                    size="small"
+                    @keyup.enter="onSaveEdit(task)"
+                    @keyup.escape="onCancelEdit"
+                    @blur="onSaveEdit(task)"
+                />
+            </template>
+            <span v-else class="frosh-widget-tasks__text">{{ task.text }}</span>
+            <button
+                v-if="editingId !== task.id"
+                class="frosh-widget-tasks__edit"
+                type="button"
+                :title="$tc('frosh-admin-dashboard.widget.tasks.edit')"
+                @click="onStartEdit(task)"
+            >
+                <mt-icon name="regular-pencil-s" size="12px" />
+            </button>
             <button
                 class="frosh-widget-tasks__remove"
                 type="button"

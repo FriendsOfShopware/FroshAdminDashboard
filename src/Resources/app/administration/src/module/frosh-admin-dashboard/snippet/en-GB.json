@@ -180,6 +180,7 @@
                 "label": "Task list",
                 "description": "A personal to-do list.",
                 "placeholder": "Add a task…",
+                "edit": "Edit task",
                 "remove": "Remove task",
                 "hideCompleted": "Hide completed tasks",
                 "empty": "No tasks yet. Add your first one above.",
