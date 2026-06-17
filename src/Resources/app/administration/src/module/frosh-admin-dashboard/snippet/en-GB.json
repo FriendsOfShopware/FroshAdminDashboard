@@ -98,14 +98,6 @@
                 "label": "Top promotion codes",
                 "description": "Most-used promotion codes by order count."
             },
-            "orders": {
-                "label": "Orders",
-                "description": "Today's orders and the order-count trend chart."
-            },
-            "turnover": {
-                "label": "Turnover",
-                "description": "Today's turnover and the turnover trend chart."
-            },
             "recentOrders": {
                 "label": "Recent orders",
                 "description": "The latest orders at a glance.",

@@ -98,14 +98,6 @@
                 "label": "Top-Aktionscodes",
                 "description": "Meistgenutzte Aktionscodes nach Bestellanzahl."
             },
-            "orders": {
-                "label": "Bestellungen",
-                "description": "Heutige Bestellungen und das Bestellungs-Trenddiagramm."
-            },
-            "turnover": {
-                "label": "Umsatz",
-                "description": "Heutiger Umsatz und das Umsatz-Trenddiagramm."
-            },
             "recentOrders": {
                 "label": "Neueste Bestellungen",
                 "description": "Die letzten Bestellungen auf einen Blick.",

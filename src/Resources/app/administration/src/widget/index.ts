@@ -28,38 +28,6 @@ Component.register('frosh-widget-recent-customers', () => import('./frosh-widget
 Component.register('frosh-widget-group-requests', () => import('./frosh-widget-group-requests'));
 Component.register('frosh-widget-pending-reviews', () => import('./frosh-widget-pending-reviews'));
 
-// Orders and turnover widgets extend the core statistics component so they
-// inherit all of its data fetching, ACL and range logic while rendering just
-// one chart each.
-Component.extend('frosh-widget-orders', 'sw-dashboard-statistics', () => import('./frosh-widget-orders'));
-Component.extend('frosh-widget-turnover', 'sw-dashboard-statistics', () => import('./frosh-widget-turnover'));
-
-widgetRegistry.registerWidget({
-    id: 'frosh-widget-orders',
-    label: 'frosh-admin-dashboard.widget.orders.label',
-    description: 'frosh-admin-dashboard.widget.orders.description',
-    icon: 'regular-shopping-bag',
-    component: 'frosh-widget-orders',
-    defaultSize: 'medium',
-    supportedSizes: ['medium', 'large', 'full'],
-    unique: true,
-    group: 'analytics',
-    acl: ['order.viewer'],
-});
-
-widgetRegistry.registerWidget({
-    id: 'frosh-widget-turnover',
-    label: 'frosh-admin-dashboard.widget.turnover.label',
-    description: 'frosh-admin-dashboard.widget.turnover.description',
-    icon: 'regular-chart-line',
-    component: 'frosh-widget-turnover',
-    defaultSize: 'medium',
-    supportedSizes: ['medium', 'large', 'full'],
-    unique: true,
-    group: 'analytics',
-    acl: ['order.viewer'],
-});
-
 widgetRegistry.registerWidget({
     id: 'frosh-widget-recent-orders',
     label: 'frosh-admin-dashboard.widget.recentOrders.label',

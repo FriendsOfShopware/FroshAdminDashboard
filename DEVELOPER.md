@@ -12,7 +12,7 @@ own plugin.
 | Widget chrome | `component/frosh-dashboard-widget` — header, drag handle and controls around each widget body. |
 | Widget catalogue | `core/widget-registry.ts` — a singleton registry of available widgets and groups. |
 | Persistence | `core/dashboard-layout.service.ts` — reads/writes the layout via `userConfigService` (`user_config` row, key `frosh-admin-dashboard.layout`). |
-| Built-in widgets | `widget/` — orders, turnover (both `Component.extend` the core `sw-dashboard-statistics` to show one chart each), recent orders, recent registrations, B2B group requests and pending reviews (last N records, filterable by sales channel; group requests has inline accept/decline, pending reviews has inline approve/decline-with-confirmation), quick links, notes, tasks, and 12 analytics charts under `widget/analytics/`. |
+| Built-in widgets | `widget/` — recent orders, recent registrations, B2B group requests and pending reviews (last N records, filterable by sales channel; group requests has inline accept/decline, pending reviews has inline approve/decline-with-confirmation), quick links, notes, tasks, and 12 analytics charts under `widget/analytics/` (each a standalone widget on the `frosh-analytics-timeseries` / `frosh-analytics-breakdown` base — they fetch via native DAL criteria, no core component extension). |
 | Analytics base components | `widget/analytics/_base/` — `frosh-analytics-timeseries` (line/area chart + range picker) and `frosh-analytics-breakdown` (ranked top-N list). Each concrete chart supplies only a `fetcher` with its DAL criteria; helpers live in `widget/analytics/_common/`. |
 
 The stored layout (per user) looks like:
