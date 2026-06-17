@@ -1,4 +1,6 @@
 .frosh-widget-group-requests {
+    overflow-x: auto;
+
     &__grid {
         border: none;
     }
@@ -6,6 +8,7 @@
     &__actions {
         display: flex;
         gap: 8px;
+        white-space: nowrap;
         justify-content: flex-end;
     }
 

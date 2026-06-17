@@ -1,12 +1,48 @@
 .frosh-widget-pending-reviews {
+    // Let the data grid scroll horizontally inside the widget instead of
+    // clipping its right-most columns (actions) when the widget is narrow.
+    overflow-x: auto;
+
     &__grid {
         border: none;
     }
 
     &__actions {
         display: flex;
-        gap: 8px;
+        gap: 4px;
         justify-content: flex-end;
+        white-space: nowrap;
+    }
+
+    &__action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: 1px solid var(--color-border-primary-default, #d1d9e0);
+        border-radius: var(--border-radius-default, 4px);
+        background: var(--color-elevation-surface-raised, #fff);
+        cursor: pointer;
+        transition: background 0.1s ease-in-out, color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+        &--approve:hover:not(:disabled) {
+            color: #fff;
+            background: var(--color-interaction-primary-default, #189eff);
+            border-color: var(--color-interaction-primary-default, #189eff);
+        }
+
+        &--decline:hover:not(:disabled) {
+            color: #fff;
+            background: var(--color-icon-critical-default, #de294c);
+            border-color: var(--color-icon-critical-default, #de294c);
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
     }
 
     &__empty {

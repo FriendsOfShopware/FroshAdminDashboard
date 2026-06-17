@@ -81,13 +81,11 @@ export default Shopware.Component.wrapComponentConfig({
             return criteria;
         },
 
-        columns(): Array<{ property: string; label: string }> {
+        columns(): Array<{ property: string; label: string; width?: string; align?: string }> {
             return [
                 { property: 'title', label: this.$tc('sw-review.list.columnTitle') },
-                { property: 'points', label: this.$tc('sw-review.list.columnPoints') },
-                { property: 'product', label: this.$tc('sw-review.list.columnProduct') },
-                { property: 'user', label: this.$tc('sw-review.list.columnUser') },
-                { property: 'actions', label: '' },
+                { property: 'points', label: this.$tc('sw-review.list.columnPoints'), width: '120px' },
+                { property: 'actions', label: '', width: '80px', align: 'right' },
             ];
         },
     },

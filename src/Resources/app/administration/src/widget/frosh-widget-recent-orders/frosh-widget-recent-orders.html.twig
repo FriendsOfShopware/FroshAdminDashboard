@@ -7,6 +7,15 @@
     </div>
     {% endblock %}
 
+    {% block frosh_widget_recent_orders_empty_state %}
+    <div
+        v-else-if="!isLoading && !orders.length"
+        class="frosh-widget-recent-orders__empty"
+    >
+        {{ $tc('frosh-admin-dashboard.widget.recentOrders.empty') }}
+    </div>
+    {% endblock %}
+
     {% block frosh_widget_recent_orders_grid %}
     <sw-data-grid
         v-else
@@ -57,14 +66,6 @@
         {% block frosh_widget_recent_orders_column_date %}
         <template #column-orderDateTime="{ item }">
             <sw-time-ago :date="item.orderDateTime" />
-        </template>
-        {% endblock %}
-
-        {% block frosh_widget_recent_orders_empty %}
-        <template #empty-state>
-            <div class="frosh-widget-recent-orders__empty">
-                {{ $tc('frosh-admin-dashboard.widget.recentOrders.empty') }}
-            </div>
         </template>
         {% endblock %}
     </sw-data-grid>

@@ -66,6 +66,11 @@
         padding: 16px;
         flex: 1 1 auto;
         min-height: 80px;
+        // Allow the flex child to shrink and scroll wide content (e.g. data
+        // grids) instead of overflowing and being clipped by the card's
+        // `overflow: hidden`.
+        min-width: 0;
+        overflow: auto;
     }
 
     &__missing {
