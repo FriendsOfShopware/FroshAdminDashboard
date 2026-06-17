@@ -23,7 +23,6 @@ widgetRegistry.registerGroup({ id: 'productivity', label: 'frosh-admin-dashboard
 Component.register('frosh-widget-notes', () => import('./frosh-widget-notes'));
 Component.register('frosh-widget-tasks', () => import('./frosh-widget-tasks'));
 Component.register('frosh-widget-quick-links', () => import('./frosh-widget-quick-links'));
-Component.register('frosh-widget-statistics', () => import('./frosh-widget-statistics'));
 Component.register('frosh-widget-recent-orders', () => import('./frosh-widget-recent-orders'));
 Component.register('frosh-widget-recent-customers', () => import('./frosh-widget-recent-customers'));
 Component.register('frosh-widget-group-requests', () => import('./frosh-widget-group-requests'));
@@ -34,19 +33,6 @@ Component.register('frosh-widget-pending-reviews', () => import('./frosh-widget-
 // one chart each.
 Component.extend('frosh-widget-orders', 'sw-dashboard-statistics', () => import('./frosh-widget-orders'));
 Component.extend('frosh-widget-turnover', 'sw-dashboard-statistics', () => import('./frosh-widget-turnover'));
-
-widgetRegistry.registerWidget({
-    id: 'frosh-widget-statistics',
-    label: 'frosh-admin-dashboard.widget.statistics.label',
-    description: 'frosh-admin-dashboard.widget.statistics.description',
-    icon: 'regular-chart-line',
-    component: 'frosh-widget-statistics',
-    defaultSize: 'full',
-    supportedSizes: ['large', 'full'],
-    unique: true,
-    group: 'analytics',
-    acl: ['order.viewer'],
-});
 
 widgetRegistry.registerWidget({
     id: 'frosh-widget-orders',

@@ -12,7 +12,7 @@ own plugin.
 | Widget chrome | `component/frosh-dashboard-widget` — header, drag handle and controls around each widget body. |
 | Widget catalogue | `core/widget-registry.ts` — a singleton registry of available widgets and groups. |
 | Persistence | `core/dashboard-layout.service.ts` — reads/writes the layout via `userConfigService` (`user_config` row, key `frosh-admin-dashboard.layout`). |
-| Built-in widgets | `widget/` — statistics (combined), orders, turnover (the last two `Component.extend` the core `sw-dashboard-statistics` to show one chart each), recent orders, recent registrations, B2B group requests and pending reviews (last N records, filterable by sales channel; group requests has inline accept/decline, pending reviews has inline approve/decline-with-confirmation), quick links, notes, tasks, and 12 analytics charts under `widget/analytics/`. |
+| Built-in widgets | `widget/` — orders, turnover (both `Component.extend` the core `sw-dashboard-statistics` to show one chart each), recent orders, recent registrations, B2B group requests and pending reviews (last N records, filterable by sales channel; group requests has inline accept/decline, pending reviews has inline approve/decline-with-confirmation), quick links, notes, tasks, and 12 analytics charts under `widget/analytics/`. |
 | Analytics base components | `widget/analytics/_base/` — `frosh-analytics-timeseries` (line/area chart + range picker) and `frosh-analytics-breakdown` (ranked top-N list). Each concrete chart supplies only a `fetcher` with its DAL criteria; helpers live in `widget/analytics/_common/`. |
 
 The stored layout (per user) looks like:
@@ -20,7 +20,7 @@ The stored layout (per user) looks like:
 ```json
 {
     "frosh-admin-dashboard.layout": [
-        { "uid": "frosh-widget-statistics-ab12", "widgetId": "frosh-widget-statistics", "size": "full", "settings": {} },
+        { "uid": "frosh-widget-orders-ab12", "widgetId": "frosh-widget-orders", "size": "medium", "settings": {} },
         { "uid": "frosh-widget-notes-cd34",      "widgetId": "frosh-widget-notes",      "size": "medium", "settings": { "text": "..." } }
     ]
 }

@@ -85,7 +85,7 @@ export default Shopware.Component.wrapComponentConfig({
         getDefaultLayout(): PlacedWidget[] {
             // First-run layout: pick a set of defaults, skipping any the user
             // lacks the ACL privileges for.
-            const defaults = ['frosh-widget-statistics', 'frosh-widget-quick-links', 'frosh-widget-notes'];
+            const defaults = ['frosh-widget-orders', 'frosh-widget-turnover', 'frosh-widget-quick-links', 'frosh-widget-notes'];
 
             return defaults
                 .map((id) => widgetRegistry.getWidget(id))

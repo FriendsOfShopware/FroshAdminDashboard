@@ -45,10 +45,6 @@
             "unknown": "Unbekanntes Widget \"{ id }\". Das bereitstellende Plugin ist möglicherweise deaktiviert.",
             "noAccess": "Fehlende Berechtigungen",
             "missingPrivileges": "Dir fehlen folgende Berechtigungen: { privileges }",
-            "statistics": {
-                "label": "Bestellstatistik",
-                "description": "Heutige Bestellungen, Umsatz und Trend-Diagramme."
-            },
             "totalSales": {
                 "label": "Gesamtumsatz",
                 "description": "Gesamter Bestellwert im Zeitverlauf.",

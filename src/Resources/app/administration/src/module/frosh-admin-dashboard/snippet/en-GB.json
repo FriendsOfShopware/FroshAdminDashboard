@@ -45,10 +45,6 @@
             "unknown": "Unknown widget \"{ id }\". The providing plugin may be disabled.",
             "noAccess": "Missing permissions",
             "missingPrivileges": "You are missing the following permissions: { privileges }",
-            "statistics": {
-                "label": "Order statistics",
-                "description": "Today's orders, turnover and trend charts."
-            },
             "totalSales": {
                 "label": "Total sales",
                 "description": "Total order value over time.",
