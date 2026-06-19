@@ -1,4 +1,7 @@
-import type { Page, Locator } from '@playwright/test';
+// Import the Page/Locator types from the acceptance suite so they resolve to
+// the same `playwright-core` copy the suite's `AdminPage` fixture uses
+// (avoids "two playwright-core" type clashes).
+import type { Page, Locator } from '@shopware-ag/acceptance-test-suite';
 
 /**
  * Page object for the modular dashboard. Selectors map to the plugin's own
