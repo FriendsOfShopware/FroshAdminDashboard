@@ -17,5 +17,8 @@
     "comment": "Pin a single playwright-core so the suite and @playwright/test share one type/runtime copy.",
     "overrides": {
         "playwright-core": "1.60.0"
+    },
+    "dependencies": {
+        "kagami-playwright-reporter": "^0.0.2"
     }
 }

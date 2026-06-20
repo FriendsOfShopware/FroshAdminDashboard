@@ -24,7 +24,16 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: 1,
-    reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'html',
+    reporter: process.env.CI
+        ? [
+              ['github'],
+              ['kagami-playwright-reporter', {
+                  apiUrl: "https://kagami.shyim.de",
+                  audience: "https://kagami.shyim.de",
+              }],
+              ['html', { open: 'never' }],
+          ]
+        : 'html',
     timeout: 60_000,
 
     use: {
