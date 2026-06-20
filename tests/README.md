@@ -52,12 +52,12 @@ widget labels assume the English admin locale.
 2. The [shopware-demo-environment](https://github.com/FriendsOfShopware/shopware-demo-environment)
    container is started on `http://localhost:8000`.
 3. `shopware-cli project extension upload dist/FroshAdminDashboard.zip --activate`
-   installs the plugin through the Admin API. The connection is read from
-   `../.shopware-project.yml`, whose values come from the environment
-   (`SHOPWARE_PROJECT_URL`, `SHOPWARE_ADMIN_USERNAME`, `SHOPWARE_ADMIN_PASSWORD`)
-   — so no credentials are committed.
+   installs the plugin through the Admin API. The connection is taken straight
+   from the `SHOPWARE_CLI_API_URL`, `SHOPWARE_CLI_API_USERNAME` and
+   `SHOPWARE_CLI_API_PASSWORD` environment variables — no config file or
+   committed credentials needed.
 4. Playwright runs against the container and the HTML report is uploaded.
 
 You can reproduce this locally: start the demo container, then from the plugin
-root run `SHOPWARE_PROJECT_URL=… SHOPWARE_ADMIN_USERNAME=admin
-SHOPWARE_ADMIN_PASSWORD=shopware shopware-cli project extension upload . --activate`.
+root run `SHOPWARE_CLI_API_URL=… SHOPWARE_CLI_API_USERNAME=admin
+SHOPWARE_CLI_API_PASSWORD=shopware shopware-cli project extension upload . --activate`.
