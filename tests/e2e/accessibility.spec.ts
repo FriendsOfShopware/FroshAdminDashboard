@@ -12,6 +12,18 @@ test.describe('Frosh Admin Dashboard — accessibility', () => {
         const dashboard = new DashboardPage(AdminPage);
         await dashboard.goto();
 
+        // The default dashboard renders two time-series widgets (Total sales,
+        // Number of orders). Their core sw-chart-card range <select> appears only
+        // once data has loaded, and the widget then labels it asynchronously
+        // (the runtime workaround for the unlabelled core select). Wait until both
+        // selects exist AND are labelled before scanning — checking only
+        // "no unlabelled selects" would pass while none have rendered yet and let
+        // axe race the labelling on slower (CI) machines (false select-name).
+        const labelledSelects = AdminPage.locator(
+            '.frosh-dashboard-grid select[aria-label]:not([aria-label=""]), .frosh-dashboard-grid select[aria-labelledby]',
+        );
+        await expect.poll(async () => labelledSelects.count(), { timeout: 30_000 }).toBe(2);
+
         const results = await new AxeBuilder({ page: AdminPage })
             .include('.frosh-dashboard-grid')
             .withTags(['wcag2a', 'wcag2aa'])
