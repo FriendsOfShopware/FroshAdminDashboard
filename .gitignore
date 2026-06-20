@@ -1,6 +1,7 @@
 /vendor/
 /node_modules/
 /src/Resources/public/
+/src/Storefront/Resources/public/
 *.log
 .DS_Store
 .idea/

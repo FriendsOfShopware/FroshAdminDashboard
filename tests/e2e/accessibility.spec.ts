@@ -12,6 +12,17 @@ test.describe('Frosh Admin Dashboard — accessibility', () => {
         const dashboard = new DashboardPage(AdminPage);
         await dashboard.goto();
 
+        // The core sw-chart-card renders its range <select> only once data has
+        // loaded, and the widget then labels it asynchronously (the runtime
+        // workaround for the unlabelled core select). Wait until every rendered
+        // select has its accessible name before scanning, otherwise axe can race
+        // the labeling on slower (CI) machines and report a false select-name.
+        await expect
+            .poll(async () =>
+                AdminPage.locator('.frosh-dashboard-grid select:not([aria-label]):not([aria-labelledby])').count(),
+            )
+            .toBe(0);
+
         const results = await new AxeBuilder({ page: AdminPage })
             .include('.frosh-dashboard-grid')
             .withTags(['wcag2a', 'wcag2aa'])
