@@ -3,16 +3,13 @@ import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { SeriesPoint, TimeseriesResult } from '../_base/frosh-analytics-timeseries';
 import { parseBucketDate } from '../_common/series';
+import { toStorageDateTime, userTimeZone } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
 interface CountBucket {
     key: string;
     filter?: { countAgg?: { count: number } };
-}
-
-function toStorageDate(date: Date): string {
-    return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
 
 /**
@@ -46,8 +43,10 @@ export default Shopware.Component.wrapComponentConfig({
                 criteria.addFilter(Criteria.equals('salesChannelId', salesChannelId));
             }
 
-            // Total customers existing up to the end of the range.
-            criteria.addFilter(Criteria.range('createdAt', { lte: toStorageDate(toDate) }));
+            // `total` is the cumulative customer count as of now. No upper-bound
+            // filter: every customer was created in the past, so capping by
+            // `lte: now` can only undercount (the count must equal COUNT(*),
+            // optionally scoped to the sales channel).
             criteria.addAggregation(
                 Criteria.histogram(
                     'createdAt',
@@ -56,10 +55,10 @@ export default Shopware.Component.wrapComponentConfig({
                     interval.format,
                     Criteria.filter(
                         'filter',
-                        [Criteria.range('createdAt', { gte: toStorageDate(fromDate), lte: toStorageDate(toDate) })],
+                        [Criteria.range('createdAt', { gte: toStorageDateTime(fromDate), lte: toStorageDateTime(toDate) })],
                         Criteria.count('countAgg', 'id'),
                     ),
-                    null,
+                    userTimeZone(),
                 ),
             );
 

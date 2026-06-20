@@ -3,12 +3,15 @@
 
     {% block frosh_analytics_breakdown_toolbar %}
     <div class="frosh-analytics-breakdown__toolbar">
-        <sw-context-button :menu-width="160">
+        <sw-context-button
+            :menu-width="160"
+            :aria-label="$tc('frosh-admin-dashboard.analytics.rangeLabel')"
+        >
             <template #button>
-                <button class="frosh-analytics-breakdown__range" type="button">
+                <span class="frosh-analytics-breakdown__range">
                     {{ $tc(`frosh-admin-dashboard.analytics.range.${selectedRange}`) }}
-                    <mt-icon name="regular-chevron-down-xs" size="12px" decorative />
-                </button>
+                    <mt-icon name="regular-chevron-down-xs" size="12px" aria-hidden="true" />
+                </span>
             </template>
 
             <sw-context-menu-item

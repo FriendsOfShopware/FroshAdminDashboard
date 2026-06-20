@@ -87,8 +87,11 @@ export default Shopware.Component.wrapComponentConfig({
         rangeDates(rangeLabel: string): { fromDate: Date; toDate: Date; interval: Interval } {
             const range = RANGES.find((entry) => entry.label === rangeLabel) ?? RANGES[0];
 
-            const toDate = Shopware.Utils.format.dateWithUserTimezone();
-            const fromDate = Shopware.Utils.format.dateWithUserTimezone();
+            // Use the true current instant so the `lte` bound includes records
+            // created in the last few hours. (`dateWithUserTimezone()` shifts the
+            // instant by the user offset and would undercount recent data.)
+            const toDate = new Date();
+            const fromDate = new Date();
             fromDate.setDate(fromDate.getDate() - range.days);
 
             return { fromDate, toDate, interval: intervalFromDates(fromDate, toDate) };

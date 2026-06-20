@@ -50,19 +50,21 @@
                     v-tooltip="{ message: $tc('frosh-admin-dashboard.widget.pendingReviews.approve') }"
                     class="frosh-widget-pending-reviews__action frosh-widget-pending-reviews__action--approve"
                     type="button"
+                    :aria-label="$tc('frosh-admin-dashboard.widget.pendingReviews.approve')"
                     :disabled="!acl.can('review.editor') || isProcessing(item.id)"
                     @click="onApprove(item)"
                 >
-                    <mt-icon name="regular-checkmark" size="14px" />
+                    <mt-icon name="regular-checkmark" size="14px" aria-hidden="true" />
                 </button>
                 <button
                     v-tooltip="{ message: $tc('frosh-admin-dashboard.widget.pendingReviews.decline') }"
                     class="frosh-widget-pending-reviews__action frosh-widget-pending-reviews__action--decline"
                     type="button"
+                    :aria-label="$tc('frosh-admin-dashboard.widget.pendingReviews.decline')"
                     :disabled="!acl.can('review.deleter') || isProcessing(item.id)"
                     @click="onDeclineRequest(item)"
                 >
-                    <mt-icon name="regular-times" size="14px" />
+                    <mt-icon name="regular-times" size="14px" aria-hidden="true" />
                 </button>
             </div>
         </template>

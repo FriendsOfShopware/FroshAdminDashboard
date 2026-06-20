@@ -3,16 +3,13 @@ import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { TimeseriesResult } from '../_base/frosh-analytics-timeseries';
 import { bucketsToSeries } from '../_common/series';
+import { toStorageDateTime, userTimeZone } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
 interface CountBucket {
     key: string;
     countAgg?: { count: number };
-}
-
-function toStorageDate(date: Date): string {
-    return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
 
 /** New customers (registrations) over time. */
@@ -44,7 +41,7 @@ export default Shopware.Component.wrapComponentConfig({
             }
 
             criteria
-                .addFilter(Criteria.range('createdAt', { gte: toStorageDate(fromDate), lte: toStorageDate(toDate) }))
+                .addFilter(Criteria.range('createdAt', { gte: toStorageDateTime(fromDate), lte: toStorageDateTime(toDate) }))
                 .addAggregation(
                     Criteria.histogram(
                         'createdAt',
@@ -52,7 +49,7 @@ export default Shopware.Component.wrapComponentConfig({
                         interval.interval,
                         interval.format,
                         Criteria.count('countAgg', 'id'),
-                        null,
+                        userTimeZone(),
                     ),
                 );
 

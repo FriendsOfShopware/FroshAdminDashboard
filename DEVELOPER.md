@@ -113,8 +113,28 @@ End-to-end Playwright tests live in `tests/` and use the official
 [`@shopware-ag/acceptance-test-suite`](https://www.npmjs.com/package/@shopware-ag/acceptance-test-suite)
 (logged-in `AdminPage` fixture). They cover smoke + widget placement: the grid
 replaces the core dashboard and renders without console errors, edit mode and the
-add-widget picker work, and adding/removing a widget persists. See
-`tests/README.md` for setup and `npm test`.
+add-widget picker work, and adding/removing a widget persists. A separate
+`e2e/accessibility.spec.ts` runs axe-core (WCAG 2 A/AA) over the grid and fails
+on any serious/critical violation. See `tests/README.md` for setup and `npm test`.
+
+The page object (`tests/pages/dashboard.page.ts`) prefers role/name locators
+(`getByRole`) over CSS, which keeps the tests aligned with the accessibility tree.
+
+## Accessibility
+
+The widget markup is built to be screen-reader friendly:
+
+- Each placed widget is a labelled region (`<section role="group" aria-labelledby>`),
+  and its title is an `<h2>` — so users can navigate widget-to-widget by heading.
+- Icon-only controls (approve/decline, configure/resize/remove, add task, the
+  breakdown range picker) carry an `aria-label`; their decorative icons are
+  `aria-hidden`.
+- The core `sw-chart-card` range `<select>` is labelled at runtime by the
+  time-series base component (it has no label prop of its own).
+
+Verified with axe-core: zero violations in view mode. (One borderline
+`color-contrast` warning remains on the core `mt-button--primary` — 4.4:1 vs the
+4.5:1 target — which comes from the Meteor component library, not this plugin.)
 
 ## Store screenshots
 

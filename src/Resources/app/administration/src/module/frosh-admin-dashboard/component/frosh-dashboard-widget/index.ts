@@ -48,6 +48,11 @@ export default Shopware.Component.wrapComponentConfig({
             return this.definition ? this.$tc(this.definition.label) : this.placed.widgetId;
         },
 
+        /** Unique heading id so the widget region can reference it via aria-labelledby. */
+        titleId(): string {
+            return `frosh-widget-title-${this.placed.uid}`;
+        },
+
         /** Sizes this widget opted into (registry already defaults to all). */
         supportedSizes(): WidgetSize[] {
             return this.definition?.supportedSizes ?? [...ALL_SIZES];

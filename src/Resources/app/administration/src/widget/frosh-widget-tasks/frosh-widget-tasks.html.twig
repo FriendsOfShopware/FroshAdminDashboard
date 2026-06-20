@@ -13,9 +13,10 @@
             variant="primary"
             size="small"
             type="submit"
+            :aria-label="$tc('frosh-admin-dashboard.widget.tasks.add')"
             :disabled="!newTask.trim()"
         >
-            <mt-icon name="regular-plus" size="14px" />
+            <mt-icon name="regular-plus" size="14px" aria-hidden="true" />
         </mt-button>
     </form>
     {% endblock %}
@@ -31,6 +32,7 @@
             <mt-checkbox
                 v-model:checked="task.done"
                 class="frosh-widget-tasks__check"
+                :aria-label="$tc('frosh-admin-dashboard.widget.tasks.toggle', { task: task.text })"
                 @update:checked="persist"
             />
             <template v-if="editingId === task.id">
@@ -38,6 +40,7 @@
                     v-model="editText"
                     class="frosh-widget-tasks__edit-input"
                     size="small"
+                    :aria-label="$tc('frosh-admin-dashboard.widget.tasks.edit')"
                     @keyup.enter="onSaveEdit(task)"
                     @keyup.escape="onCancelEdit"
                     @blur="onSaveEdit(task)"
@@ -48,18 +51,18 @@
                 v-if="editingId !== task.id"
                 class="frosh-widget-tasks__edit"
                 type="button"
-                :title="$tc('frosh-admin-dashboard.widget.tasks.edit')"
+                :aria-label="$tc('frosh-admin-dashboard.widget.tasks.edit')"
                 @click="onStartEdit(task)"
             >
-                <mt-icon name="regular-pencil-s" size="12px" />
+                <mt-icon name="regular-pencil-s" size="12px" aria-hidden="true" />
             </button>
             <button
                 class="frosh-widget-tasks__remove"
                 type="button"
-                :title="$tc('frosh-admin-dashboard.widget.tasks.remove')"
+                :aria-label="$tc('frosh-admin-dashboard.widget.tasks.remove')"
                 @click="onRemove(task.id)"
             >
-                <mt-icon name="regular-trash" size="12px" />
+                <mt-icon name="regular-trash" size="12px" aria-hidden="true" />
             </button>
         </li>
     </ul>

@@ -8,24 +8,27 @@ import type { Interval } from './interval';
 import { histogramField } from './interval';
 
 const { Criteria } = Shopware.Data;
-const { format } = Shopware.Utils;
 
 type Aggregation = ReturnType<typeof Criteria.sum>;
 
-/** Storage date format the DAL range filter expects (UTC, `Y-m-d H:i:s`). */
-function toStorageDate(date: Date): string {
-    return format.dateWithUserTimezone
-        ? new Date(date).toISOString().slice(0, 19).replace('T', ' ')
-        : new Date(date).toISOString().slice(0, 19).replace('T', ' ');
+/** The admin user's IANA timezone (defaults to UTC) — used to bucket histograms by local days. */
+export function userTimeZone(): string {
+    return (Shopware.Store.get('session').currentUser?.timeZone as string) ?? 'UTC';
 }
 
-/** Date-only fields must receive date-only values or the first day can be excluded. */
-export function toStorageDateOnly(date: Date): string {
-    return format.toISODate(date, false);
-}
-
+/**
+ * Format a real instant as the UTC datetime string the DAL range filter expects
+ * (`Y-m-d H:i:s`). The input `Date` must encode the true instant (e.g. a plain
+ * `new Date()`); never a value from `dateWithUserTimezone()`, which shifts the
+ * instant by the user's offset and would undercount the most recent records.
+ */
 export function toStorageDateTime(date: Date): string {
-    return toStorageDate(date);
+    return date.toISOString().slice(0, 19).replace('T', ' ');
+}
+
+/** Date-only (`Y-m-d`) bound for date-only DAL fields. */
+export function toStorageDateOnly(date: Date): string {
+    return date.toISOString().slice(0, 10);
 }
 
 export function baseOrderCriteria(salesChannelId?: string | null): InstanceType<typeof Criteria> {
@@ -46,7 +49,7 @@ export function dateRangeFilter(fromDate: Date, toDate: Date): ReturnType<typeof
     });
 }
 
-/** Histogram over the order date, with a nested aggregation. */
+/** Histogram over the order date, with a nested aggregation. Bucketed by the user's timezone. */
 export function groupedByDateHistogram(interval: Interval, nested: Aggregation): ReturnType<typeof Criteria.histogram> {
     return Criteria.histogram(
         'groupedByDate',
@@ -54,7 +57,7 @@ export function groupedByDateHistogram(interval: Interval, nested: Aggregation):
         interval.interval,
         interval.format,
         nested,
-        null,
+        userTimeZone(),
     );
 }
 
@@ -75,7 +78,7 @@ export function groupedByCurrencyFactorHistogram(
             interval.interval,
             interval.format,
             nested,
-            null,
+            userTimeZone(),
         ),
     );
 }

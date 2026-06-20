@@ -21,6 +21,7 @@
             "salesChannel": "Sales channel",
             "salesChannelHelp": "Limit the data to one sales channel. Leave empty for all.",
             "empty": "No data for the selected range.",
+            "rangeLabel": "Select time range",
             "range": {
                 "30Days": "Last 30 days",
                 "14Days": "Last 14 days",
@@ -169,6 +170,8 @@
                 "label": "Task list",
                 "description": "A personal to-do list.",
                 "placeholder": "Add a task…",
+                "add": "Add task",
+                "toggle": "Toggle task: { task }",
                 "edit": "Edit task",
                 "remove": "Remove task",
                 "hideCompleted": "Hide completed tasks",

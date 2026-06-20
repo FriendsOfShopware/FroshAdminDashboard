@@ -24,8 +24,10 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        margin: 0;
         font-weight: var(--font-weight-semibold, 600);
         font-size: var(--font-size-s, 14px);
+        line-height: 1.4;
         color: var(--color-text-primary-default, #0a0c11);
     }
 

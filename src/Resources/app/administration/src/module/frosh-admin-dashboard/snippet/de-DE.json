@@ -21,6 +21,7 @@
             "salesChannel": "Verkaufskanal",
             "salesChannelHelp": "Daten auf einen Verkaufskanal beschränken. Leer lassen für alle.",
             "empty": "Keine Daten im gewählten Zeitraum.",
+            "rangeLabel": "Zeitraum auswählen",
             "range": {
                 "30Days": "Letzte 30 Tage",
                 "14Days": "Letzte 14 Tage",
@@ -169,6 +170,8 @@
                 "label": "Aufgabenliste",
                 "description": "Eine persönliche To-do-Liste.",
                 "placeholder": "Aufgabe hinzufügen…",
+                "add": "Aufgabe hinzufügen",
+                "toggle": "Aufgabe umschalten: { task }",
                 "edit": "Aufgabe bearbeiten",
                 "remove": "Aufgabe entfernen",
                 "hideCompleted": "Erledigte Aufgaben ausblenden",

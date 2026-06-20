@@ -1,19 +1,25 @@
 {% block frosh_dashboard_widget %}
-<div class="frosh-dashboard-widget" :class="{ 'frosh-dashboard-widget--editing': editing }">
+<section
+    class="frosh-dashboard-widget"
+    :class="{ 'frosh-dashboard-widget--editing': editing }"
+    role="group"
+    :aria-labelledby="titleId"
+>
 
     {% block frosh_dashboard_widget_header %}
     <div class="frosh-dashboard-widget__header">
         {% block frosh_dashboard_widget_title %}
-        <div class="frosh-dashboard-widget__title">
+        <h2 :id="titleId" class="frosh-dashboard-widget__title">
             <mt-icon
                 v-if="editing"
                 class="frosh-dashboard-widget__drag-handle"
                 name="regular-grip-vertical"
                 size="14px"
+                aria-hidden="true"
             />
-            <mt-icon v-if="definition" :name="definition.icon" size="16px" />
+            <mt-icon v-if="definition" :name="definition.icon" size="16px" aria-hidden="true" />
             <span>{{ label }}</span>
-        </div>
+        </h2>
         {% endblock %}
 
         {% block frosh_dashboard_widget_controls %}
@@ -24,10 +30,10 @@
                 v-if="hasSettings"
                 class="frosh-dashboard-widget__control"
                 type="button"
-                :title="$tc('frosh-admin-dashboard.widget.configure')"
+                :aria-label="$tc('frosh-admin-dashboard.widget.configure')"
                 @click="$emit('configure')"
             >
-                <mt-icon name="regular-cog" size="12px" />
+                <mt-icon name="regular-cog" size="12px" aria-hidden="true" />
             </button>
             {% endblock %}
 
@@ -36,15 +42,12 @@
                 v-if="canResize"
                 class="frosh-dashboard-widget__control-resize"
                 :menu-width="160"
+                :aria-label="$tc('frosh-admin-dashboard.widget.resize')"
             >
                 <template #button>
-                    <button
-                        class="frosh-dashboard-widget__control"
-                        type="button"
-                        :title="$tc('frosh-admin-dashboard.widget.resize')"
-                    >
-                        <mt-icon name="regular-expand" size="12px" />
-                    </button>
+                    <span class="frosh-dashboard-widget__control">
+                        <mt-icon name="regular-expand" size="12px" aria-hidden="true" />
+                    </span>
                 </template>
 
                 <sw-context-menu-item
@@ -62,10 +65,10 @@
             <button
                 class="frosh-dashboard-widget__control frosh-dashboard-widget__control--danger"
                 type="button"
-                :title="$tc('frosh-admin-dashboard.widget.remove')"
+                :aria-label="$tc('frosh-admin-dashboard.widget.remove')"
                 @click="$emit('remove')"
             >
-                <mt-icon name="regular-trash" size="12px" />
+                <mt-icon name="regular-trash" size="12px" aria-hidden="true" />
             </button>
             {% endblock %}
         </div>
@@ -104,5 +107,5 @@
         {% endblock %}
     </div>
     {% endblock %}
-</div>
+</section>
 {% endblock %}
