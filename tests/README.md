@@ -61,3 +61,4 @@ widget labels assume the English admin locale.
 You can reproduce this locally: start the demo container, then from the plugin
 root run `SHOPWARE_CLI_API_URL=… SHOPWARE_CLI_API_USERNAME=admin
 SHOPWARE_CLI_API_PASSWORD=shopware shopware-cli project extension upload . --activate`.
+
