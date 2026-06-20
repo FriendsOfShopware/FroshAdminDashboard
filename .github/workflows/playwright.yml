@@ -13,6 +13,8 @@ jobs:
 
     env:
       APP_URL: http://localhost:8000
+      # Consumed by .shopware-project.yml for the extension upload.
+      SHOPWARE_PROJECT_URL: http://localhost:8000
       SHOPWARE_ADMIN_USERNAME: admin
       SHOPWARE_ADMIN_PASSWORD: shopware
 
@@ -20,13 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Compile the plugin's administration assets so the demo container can
-      # serve them (the container ships a prebuilt admin without our plugin).
       - name: Setup shopware-cli
         uses: shopware/shopware-cli-action@v3
 
-      - name: Build plugin administration assets
-        run: shopware-cli extension build .
+      # Package the plugin into a zip (compiles the administration assets).
+      - name: Build plugin zip
+        run: shopware-cli extension zip . --filename FroshAdminDashboard.zip --output-directory dist
 
       - name: Start Shopware demo environment
         run: |
@@ -48,26 +49,10 @@ jobs:
           docker logs shopware || true
           exit 1
 
-      # Copy the plugin (incl. the freshly compiled Resources/public) into the
-      # container and install + activate it.
-      - name: Install the plugin into the container
-        run: |
-          # Stage the plugin without test/CI cruft so we don't ship node_modules
-          # or the git tree into the container (the compiled Resources/public,
-          # built above, is included).
-          mkdir -p /tmp/plugin/FroshAdminDashboard
-          rsync -a \
-            --exclude='.git' \
-            --exclude='tests/node_modules' \
-            --exclude='tests/test-results' \
-            --exclude='tests/playwright-report' \
-            ./ /tmp/plugin/FroshAdminDashboard/
-          docker exec shopware mkdir -p /var/www/html/custom/plugins
-          docker cp /tmp/plugin/FroshAdminDashboard shopware:/var/www/html/custom/plugins/FroshAdminDashboard
-          docker exec -w /var/www/html shopware php bin/console plugin:refresh
-          docker exec -w /var/www/html shopware php bin/console plugin:install --activate FroshAdminDashboard
-          docker exec -w /var/www/html shopware php bin/console assets:install
-          docker exec -w /var/www/html shopware php bin/console cache:clear
+      # Upload the zip through the Admin API and install + activate it.
+      # Connection comes from .shopware-project.yml (env-substituted).
+      - name: Upload and activate the plugin
+        run: shopware-cli project extension upload dist/FroshAdminDashboard.zip --activate
 
       - name: Setup Node
         uses: actions/setup-node@v4

@@ -43,3 +43,21 @@ npm run test:report # open the last HTML report
 
 Selectors live in `pages/dashboard.page.ts` and use the plugin's BEM classes;
 widget labels assume the English admin locale.
+
+## Continuous integration
+
+`.github/workflows/playwright.yml` runs the suite on every push/PR:
+
+1. `shopware-cli extension zip` packages the plugin (compiling the admin assets).
+2. The [shopware-demo-environment](https://github.com/FriendsOfShopware/shopware-demo-environment)
+   container is started on `http://localhost:8000`.
+3. `shopware-cli project extension upload dist/FroshAdminDashboard.zip --activate`
+   installs the plugin through the Admin API. The connection is read from
+   `../.shopware-project.yml`, whose values come from the environment
+   (`SHOPWARE_PROJECT_URL`, `SHOPWARE_ADMIN_USERNAME`, `SHOPWARE_ADMIN_PASSWORD`)
+   — so no credentials are committed.
+4. Playwright runs against the container and the HTML report is uploaded.
+
+You can reproduce this locally: start the demo container, then from the plugin
+root run `SHOPWARE_PROJECT_URL=… SHOPWARE_ADMIN_USERNAME=admin
+SHOPWARE_ADMIN_PASSWORD=shopware shopware-cli project extension upload . --activate`.

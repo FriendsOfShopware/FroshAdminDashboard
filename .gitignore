@@ -2,6 +2,7 @@
 /node_modules/
 /src/Resources/public/
 /src/Storefront/Resources/public/
+/dist/
 *.log
 .DS_Store
 .idea/
