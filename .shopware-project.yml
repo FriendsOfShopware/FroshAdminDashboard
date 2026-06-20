@@ -1,9 +1,0 @@
-# Connection used by `shopware-cli project extension upload` to install the
-# plugin into a running Shopware instance via the Admin API.
-# Values are taken from the environment, so no credentials live in the repo.
-# Used by the Playwright CI workflow against the demo environment; you can also
-# use it locally by exporting the same variables.
-url: ${SHOPWARE_PROJECT_URL}
-admin_api:
-  username: ${SHOPWARE_ADMIN_USERNAME}
-  password: ${SHOPWARE_ADMIN_PASSWORD}
