@@ -6,6 +6,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   e2e:
     runs-on: ubuntu-latest
@@ -55,7 +59,7 @@ jobs:
           done
           echo "Shopware did not become ready in time" >&2
           exit 1
-          
+
       - name: Upload and activate the plugin
         run: shopware-cli project extension upload dist/FroshAdminDashboard.zip --activate
 
