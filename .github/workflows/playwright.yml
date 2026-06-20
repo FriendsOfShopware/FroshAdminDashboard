@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 30
 
     env:
-      # Container + Playwright (the acceptance-test-suite reads SHOPWARE_ADMIN_*).
+      # Playwright (the acceptance-test-suite reads SHOPWARE_ADMIN_*).
       APP_URL: http://localhost:8000
       SHOPWARE_ADMIN_USERNAME: admin
       SHOPWARE_ADMIN_PASSWORD: shopware
@@ -21,6 +21,16 @@ jobs:
       SHOPWARE_CLI_API_URL: http://localhost:8000
       SHOPWARE_CLI_API_USERNAME: admin
       SHOPWARE_CLI_API_PASSWORD: shopware
+
+    # The demo environment runs as a service container. Its baked-in default
+    # APP_URL is already http://localhost:8000, matching what we test against, so
+    # no overrides are needed. The image has no Docker HEALTHCHECK, so readiness
+    # is polled in a step below rather than via `options: --health-*`.
+    services:
+      shopware:
+        image: ghcr.io/friendsofshopware/shopware-demo-environment:6.7
+        ports:
+          - 8000:8000
 
     steps:
       - name: Checkout
@@ -33,14 +43,6 @@ jobs:
       - name: Build plugin zip
         run: shopware-cli extension zip . --filename FroshAdminDashboard.zip --output-directory dist
 
-      - name: Start Shopware demo environment
-        run: |
-          docker run -d --name shopware \
-            -e APP_URL="${APP_URL}" \
-            -e SHOPWARE_ADMIN_PASSWORD="${SHOPWARE_ADMIN_PASSWORD}" \
-            -p 8000:8000 \
-            ghcr.io/friendsofshopware/shopware-demo-environment:6.7
-
       - name: Wait for Shopware to be ready
         run: |
           for i in $(seq 1 60); do
@@ -50,7 +52,6 @@ jobs:
             sleep 5
           done
           echo "Shopware did not become ready in time" >&2
-          docker logs shopware || true
           exit 1
 
       # Upload the zip through the Admin API and install + activate it.
@@ -87,4 +88,7 @@ jobs:
 
       - name: Dump Shopware logs on failure
         if: failure()
-        run: docker logs shopware || true
+        run: |
+          # Service containers get a generated name; find it by image.
+          cid=$(docker ps -a --filter "ancestor=ghcr.io/friendsofshopware/shopware-demo-environment:6.7" --format '{{.ID}}' | head -n1)
+          if [ -n "$cid" ]; then docker logs "$cid"; fi
