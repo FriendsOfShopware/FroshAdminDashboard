@@ -39,9 +39,11 @@ jobs:
       - name: Setup shopware-cli
         uses: shopware/shopware-cli-action@v3
 
-      # Package the plugin into a zip (compiles the administration assets).
-      - name: Build plugin zip
-        run: shopware-cli extension zip . --filename FroshAdminDashboard.zip --output-directory dist
+      - name: Build extension zip
+        id: zip
+        uses: shopwareLabs/build-extension-zip-action@main
+        with:
+          output-directory: dist
 
       - name: Wait for Shopware to be ready
         run: |
@@ -53,9 +55,7 @@ jobs:
           done
           echo "Shopware did not become ready in time" >&2
           exit 1
-
-      # Upload the zip through the Admin API and install + activate it.
-      # Connection comes from the SHOPWARE_CLI_API_* env vars above.
+          
       - name: Upload and activate the plugin
         run: shopware-cli project extension upload dist/FroshAdminDashboard.zip --activate
 
