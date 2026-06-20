@@ -7,4 +7,3 @@ url: ${SHOPWARE_PROJECT_URL}
 admin_api:
   username: ${SHOPWARE_ADMIN_USERNAME}
   password: ${SHOPWARE_ADMIN_PASSWORD}
-  disable_ssl_check: true
