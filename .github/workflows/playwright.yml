@@ -45,7 +45,7 @@ jobs:
 
       - name: Build extension zip
         id: zip
-        uses: shopwareLabs/build-extension-zip-action@main
+        uses: shopware/build-extension-zip-action@v1
         with:
           output-directory: dist
 
