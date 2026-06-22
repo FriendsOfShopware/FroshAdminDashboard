@@ -1,1 +1,0 @@
-Simply install via the Shopware app manager in the shop administration. After activation the dashboard is replaced automatically; open it via the main menu and use the "Customize" button to add and arrange your widgets.

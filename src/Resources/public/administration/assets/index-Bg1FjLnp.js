@@ -1,0 +1,2 @@
+const e='{% block frosh_dashboard_index %} <sw-page class="frosh-dashboard-index" :show-smart-bar="false"> {% block frosh_dashboard_index_content %} <template #content> <div class="frosh-dashboard-index__content"> <frosh-dashboard-grid /> </div> </template> {% endblock %} </sw-page> {% endblock %}',o=Shopware.Component.wrapComponentConfig({template:e,metaInfo(){return{title:this.$createTitle()}}});export{o as default};
+//# sourceMappingURL=index-Bg1FjLnp.js.map
