@@ -4,6 +4,9 @@ build:
     assets:
       enable_asset_caching: true
 
+changelog:
+    enabled: true
+
 store:
     availabilities:
         - German
