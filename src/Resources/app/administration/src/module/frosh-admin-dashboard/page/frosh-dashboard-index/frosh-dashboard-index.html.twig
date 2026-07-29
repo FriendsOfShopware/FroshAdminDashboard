@@ -3,7 +3,30 @@
     {% block frosh_dashboard_index_content %}
     <template #content>
         <div class="frosh-dashboard-index__content">
+            {# Shopware Services dashboard banner (core sw-settings-services) #}
+            {% block frosh_dashboard_index_services_banner %}
+            <sw-settings-services-dashboard-banner />
+            {% endblock %}
+
+            {# Extension injection point — same identifier as core sw-dashboard-index #}
+            {% block frosh_dashboard_index_before_content %}
+            <sw-extension-component-section
+                position-identifier="sw-dashboard__before-content"
+                class="sw-dashboard__before-content frosh-dashboard-index__extension-section"
+            />
+            {% endblock %}
+
+            {% block frosh_dashboard_index_grid %}
             <frosh-dashboard-grid />
+            {% endblock %}
+
+            {# Extension injection point — same identifier as core sw-dashboard-index #}
+            {% block frosh_dashboard_index_after_content %}
+            <sw-extension-component-section
+                position-identifier="sw-dashboard__after-content"
+                class="sw-dashboard__after-content frosh-dashboard-index__extension-section"
+            />
+            {% endblock %}
         </div>
     </template>
     {% endblock %}
