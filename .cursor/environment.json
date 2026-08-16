@@ -1,0 +1,6 @@
+{
+    "name": "Frosh Admin Dashboard",
+    "install": "bash .cursor/install.sh",
+    "start": "bash .cursor/start.sh",
+    "ports": [8000]
+}
