@@ -47,7 +47,9 @@ export function baseOrderCriteria(salesChannelId?: string | null): InstanceType<
  * (`custom_fields.saas_test_order = true`). Missing / null is kept.
  */
 export function excludeSaasTestOrders(criteria: InstanceType<typeof Criteria>): InstanceType<typeof Criteria> {
-    criteria.addFilter(Criteria.not('AND', [Criteria.equals('customFields.saas_test_order', true)]));
+    // DAL stores/compares the JSON boolean as the string "true". A real boolean
+    // `true` does not match, so test orders would be counted as GMV.
+    criteria.addFilter(Criteria.not('AND', [Criteria.equals('customFields.saas_test_order', 'true')]));
 
     return criteria;
 }

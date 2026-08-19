@@ -83,4 +83,28 @@ test.describe('Frosh Admin Dashboard', () => {
         await dashboard.removeWidget(ADDABLE_LABEL);
         await expect(dashboard.widgetByLabel(ADDABLE_LABEL)).toHaveCount(0);
     });
+
+    test('GMV widget lists the last 3 years and rolling periods', async ({ AdminPage }) => {
+        const dashboard = new DashboardPage(AdminPage);
+        await dashboard.goto();
+
+        if ((await dashboard.widgetByLabel('GMV').count()) === 0) {
+            await dashboard.openAddWidgetModal();
+            await dashboard.pickerCard('GMV').first().click();
+        }
+
+        const widget = dashboard.widgetByLabel('GMV');
+        await expect(widget).toBeVisible();
+        await expect(widget.locator('.frosh-widget-gmv__table')).toBeVisible({ timeout: 20_000 });
+        await expect(widget.getByRole('columnheader', { name: 'Period' })).toBeVisible();
+        await expect(widget.getByRole('columnheader', { name: 'GMV' })).toBeVisible();
+
+        const currentYear = new Date().getFullYear();
+        await expect(widget.getByRole('rowheader', { name: String(currentYear) })).toBeVisible();
+        await expect(widget.getByRole('rowheader', { name: String(currentYear - 1) })).toBeVisible();
+        await expect(widget.getByRole('rowheader', { name: String(currentYear - 2) })).toBeVisible();
+        await expect(widget.getByRole('rowheader', { name: 'Last 6 months' })).toBeVisible();
+        await expect(widget.getByRole('rowheader', { name: 'Last 12 months' })).toBeVisible();
+        await expect(widget.getByRole('rowheader', { name: 'Last 18 months' })).toBeVisible();
+    });
 });
