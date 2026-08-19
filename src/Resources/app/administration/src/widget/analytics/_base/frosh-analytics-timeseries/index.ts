@@ -109,10 +109,7 @@ export default Shopware.Component.wrapComponentConfig({
         },
 
         formattedSummary(): string {
-            if (this.valueFormat === 'money') {
-                return this.currencyFilter(this.summary, this.systemCurrencyISOCode, 2);
-            }
-            return new Intl.NumberFormat().format(Math.round(this.summary * 100) / 100);
+            return this.formatChartValue(this.summary, 2);
         },
 
         fillEmptyValues(): 'hour' | 'day' {
@@ -131,10 +128,12 @@ export default Shopware.Component.wrapComponentConfig({
                 yaxis: {
                     min: 0,
                     labels: {
-                        formatter: (value: number) =>
-                            this.valueFormat === 'money'
-                                ? this.currencyFilter(value, this.systemCurrencyISOCode, 0)
-                                : new Intl.NumberFormat().format(Math.round(value)),
+                        formatter: (value: number) => this.formatChartValue(value, 0),
+                    },
+                },
+                tooltip: {
+                    y: {
+                        formatter: (value: number) => this.formatChartValue(value, 2),
                     },
                 },
             };
@@ -150,6 +149,17 @@ export default Shopware.Component.wrapComponentConfig({
     },
 
     methods: {
+        formatChartValue(value: number, decimals: number): string {
+            const amount = Number.isFinite(value) ? value : 0;
+
+            if (this.valueFormat === 'money') {
+                return this.currencyFilter(amount, this.systemCurrencyISOCode, decimals);
+            }
+
+            const factor = 10 ** decimals;
+            return new Intl.NumberFormat().format(Math.round(amount * factor) / factor);
+        },
+
         /**
          * The core sw-chart-card renders an unlabelled <select> for the range
          * picker (and only after it stops loading). We don't own that markup, so

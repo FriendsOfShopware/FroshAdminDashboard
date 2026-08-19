@@ -8,6 +8,8 @@ import {
     excludeSaasTestOrders,
     groupedByCurrencyFactorHistogram,
     parseCurrencyFactor,
+    normaliseAmount,
+    roundMoney,
 } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
@@ -126,9 +128,11 @@ export default Shopware.Component.wrapComponentConfig({
         buildRows(amountByMonth: Record<string, number>): GmvRow[] {
             const rows: GmvRow[] = this.calendarYears().map((year) => {
                 const prefix = `${year}-`;
-                const value = Object.entries(amountByMonth)
-                    .filter(([key]) => key.startsWith(prefix))
-                    .reduce((sum, [, amount]) => sum + amount, 0);
+                const value = roundMoney(
+                    Object.entries(amountByMonth)
+                        .filter(([key]) => key.startsWith(prefix))
+                        .reduce((sum, [, amount]) => sum + amount, 0),
+                );
 
                 return {
                     id: `year-${year}`,
@@ -140,9 +144,8 @@ export default Shopware.Component.wrapComponentConfig({
             });
 
             ROLLING_MONTHS.forEach((months) => {
-                const value = this.rollingMonthKeys(months).reduce(
-                    (sum, key) => sum + (amountByMonth[key] ?? 0),
-                    0,
+                const value = roundMoney(
+                    this.rollingMonthKeys(months).reduce((sum, key) => sum + (amountByMonth[key] ?? 0), 0),
                 );
 
                 rows.push({
@@ -191,8 +194,10 @@ export default Shopware.Component.wrapComponentConfig({
 
                         (currencyBucket.orderDate?.buckets ?? []).forEach((dateBucket) => {
                             const monthKey = dateBucket.key.slice(0, 7);
-                            amountByMonth[monthKey] =
-                                (amountByMonth[monthKey] ?? 0) + (dateBucket.sumAmount?.sum ?? 0) / factor;
+                            amountByMonth[monthKey] = roundMoney(
+                                (amountByMonth[monthKey] ?? 0) +
+                                    normaliseAmount(dateBucket.sumAmount?.sum ?? 0, factor),
+                            );
                         });
                     },
                 );

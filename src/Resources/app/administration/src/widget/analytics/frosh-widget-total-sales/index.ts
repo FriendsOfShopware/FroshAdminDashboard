@@ -8,6 +8,8 @@ import {
     dateRangeFilter,
     groupedByCurrencyFactorHistogram,
     parseCurrencyFactor,
+    normaliseAmount,
+    roundMoney,
 } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
@@ -58,9 +60,9 @@ export default Shopware.Component.wrapComponentConfig({
                 }
 
                 (currencyBucket.orderDate?.buckets ?? []).forEach((dateBucket) => {
-                    const amount = (dateBucket.sumAmount?.sum ?? 0) / factor;
-                    detail[dateBucket.key] = (detail[dateBucket.key] ?? 0) + amount;
-                    summary += amount;
+                    const amount = normaliseAmount(dateBucket.sumAmount?.sum ?? 0, factor);
+                    detail[dateBucket.key] = roundMoney((detail[dateBucket.key] ?? 0) + amount);
+                    summary = roundMoney(summary + amount);
                 });
             });
 

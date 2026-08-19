@@ -9,6 +9,8 @@ import {
     groupedByCurrencyFactorHistogram,
     groupedByDateHistogram,
     parseCurrencyFactor,
+    normaliseAmount,
+    roundMoney,
 } from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
@@ -66,7 +68,9 @@ export default Shopware.Component.wrapComponentConfig({
                     return;
                 }
                 (currencyBucket.orderDate?.buckets ?? []).forEach((dateBucket) => {
-                    sumByDate[dateBucket.key] = (sumByDate[dateBucket.key] ?? 0) + (dateBucket.sumAmount?.sum ?? 0) / factor;
+                    sumByDate[dateBucket.key] = roundMoney(
+                        (sumByDate[dateBucket.key] ?? 0) + normaliseAmount(dateBucket.sumAmount?.sum ?? 0, factor),
+                    );
                 });
             });
 
@@ -77,13 +81,13 @@ export default Shopware.Component.wrapComponentConfig({
             const series: SeriesPoint[] = Object.keys(sumByDate)
                 .map((key) => {
                     const count = countByDate[key] ?? 0;
-                    return { x: parseBucketDate(key), y: count === 0 ? 0 : sumByDate[key] / count };
+                    return { x: parseBucketDate(key), y: count === 0 ? 0 : roundMoney(sumByDate[key] / count) };
                 })
                 .sort((a, b) => a.x - b.x);
 
             const totalSum = Object.values(sumByDate).reduce((s, v) => s + v, 0);
             const totalCount = Object.values(countByDate).reduce((s, v) => s + v, 0);
-            const summary = totalCount === 0 ? 0 : totalSum / totalCount;
+            const summary = totalCount === 0 ? 0 : roundMoney(totalSum / totalCount);
 
             return { series, summary };
         },

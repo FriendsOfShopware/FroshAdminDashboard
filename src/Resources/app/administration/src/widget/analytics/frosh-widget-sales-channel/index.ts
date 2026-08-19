@@ -2,7 +2,13 @@ import template from './frosh-widget-sales-channel.html.twig';
 import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { BreakdownRow } from '../_base/frosh-analytics-breakdown';
-import { baseOrderCriteria, dateRangeFilter, parseCurrencyFactor } from '../_common/order-criteria';
+import {
+    baseOrderCriteria,
+    dateRangeFilter,
+    parseCurrencyFactor,
+    normaliseAmount,
+    roundMoney,
+} from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
@@ -67,7 +73,7 @@ export default Shopware.Component.wrapComponentConfig({
             ((aggregations.salesChannelSales?.buckets ?? []) as ChannelBucket[]).forEach((channelBucket) => {
                 const channelTotal = (channelBucket.currencyFactorGroup?.buckets ?? []).reduce((sum, currencyBucket) => {
                     const factor = parseCurrencyFactor(currencyBucket.key);
-                    return factor ? sum + (currencyBucket.sumAmount?.sum ?? 0) / factor : sum;
+                    return factor ? roundMoney(sum + normaliseAmount(currencyBucket.sumAmount?.sum ?? 0, factor)) : sum;
                 }, 0);
                 totalById[channelBucket.key] = channelTotal;
             });
