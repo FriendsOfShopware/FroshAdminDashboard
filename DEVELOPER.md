@@ -109,6 +109,18 @@ back to the first supported size.
 
 ## Tests
 
+Jest unit tests live in `tests/unit/` and import the Shopware-free analytics
+helpers. They cover currency rounding (`roundMoney` / `normaliseAmount`,
+including the `99.000999` leftover from issue #10) and histogram interval
+selection. From the plugin root:
+
+```bash
+npm install
+npm test
+```
+
+`.github/workflows/jest.yml` runs that suite on every push/PR.
+
 End-to-end Playwright tests live in `tests/` and use the official
 [`@shopware-ag/acceptance-test-suite`](https://www.npmjs.com/package/@shopware-ag/acceptance-test-suite)
 (logged-in `AdminPage` fixture). They cover smoke + widget placement: the grid

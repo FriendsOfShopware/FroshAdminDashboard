@@ -2,13 +2,8 @@ import template from './frosh-widget-sales-channel.html.twig';
 import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { BreakdownRow } from '../_base/frosh-analytics-breakdown';
-import {
-    baseOrderCriteria,
-    dateRangeFilter,
-    parseCurrencyFactor,
-    normaliseAmount,
-    roundMoney,
-} from '../_common/order-criteria';
+import { baseOrderCriteria, dateRangeFilter } from '../_common/order-criteria';
+import { normaliseAmount, parseCurrencyFactor, roundMoney } from '../_common/money';
 
 const { Criteria } = Shopware.Data;
 

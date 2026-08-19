@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "types": ["jest"]
+    },
+    "include": [
+        "tests/unit/**/*.spec.ts",
+        "src/Resources/app/administration/src/widget/analytics/_common/money.ts",
+        "src/Resources/app/administration/src/widget/analytics/_common/interval.ts"
+    ]
+}

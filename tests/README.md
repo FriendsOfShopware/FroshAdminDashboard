@@ -1,3 +1,8 @@
+# Tests
+
+Jest unit tests for the analytics helpers live in `unit/` and are run from the
+plugin root (`npm test`). Playwright end-to-end tests live in this folder.
+
 # End-to-end tests
 
 Playwright tests for the Frosh Admin Dashboard, built on the official
