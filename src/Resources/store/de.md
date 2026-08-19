@@ -7,7 +7,8 @@ Der aktuelle Funktionsumfang besteht aus:
     *   Widgets im Bearbeitungsmodus hinzufügen, entfernen und in der Größe ändern
     *   Widget-Einstellungen über einen generischen Einstellungsdialog
     *   Die Anordnung wird pro Benutzer gespeichert
-*   Analyse-Widgets (12 Diagramme)
+*   Analyse-Widgets (13 Widgets)
+    *   GMV (letzte 3 Jahre sowie rollierende 6 / 12 / 18 Monate)
     *   Gesamtumsatz, Anzahl Bestellungen, durchschnittlicher Bestellwert
     *   Neue Kunden und Gesamtkunden im Zeitverlauf
     *   Bestseller-Produkte, Top-Hersteller und Bestellungen nach Land

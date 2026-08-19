@@ -1,0 +1,40 @@
+{% block frosh_widget_gmv %}
+<div class="frosh-widget-gmv">
+
+    {% block frosh_widget_gmv_loader %}
+    <sw-loader v-if="isLoading" />
+    {% endblock %}
+
+    {% block frosh_widget_gmv_table %}
+    <table v-else-if="rows.length" class="frosh-widget-gmv__table">
+        <caption class="frosh-widget-gmv__caption">
+            {{ $tc('frosh-admin-dashboard.widget.gmv.caption') }}
+        </caption>
+        <thead>
+            <tr>
+                <th scope="col">{{ $tc('frosh-admin-dashboard.widget.gmv.columnPeriod') }}</th>
+                <th scope="col">{{ $tc('frosh-admin-dashboard.widget.gmv.columnGmv') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="row in yearRows" :key="row.id">
+                <th scope="row">{{ row.label }}</th>
+                <td>{{ row.formattedValue }}</td>
+            </tr>
+        </tbody>
+        <tbody class="frosh-widget-gmv__rolling">
+            <tr v-for="row in rollingRows" :key="row.id">
+                <th scope="row">{{ row.label }}</th>
+                <td>{{ row.formattedValue }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endblock %}
+
+    {% block frosh_widget_gmv_empty %}
+    <div v-else class="frosh-widget-gmv__empty">
+        {{ $tc('frosh-admin-dashboard.analytics.empty') }}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}

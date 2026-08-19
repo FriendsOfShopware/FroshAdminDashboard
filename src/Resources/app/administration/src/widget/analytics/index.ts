@@ -3,7 +3,8 @@
  * components do the rendering:
  *  - frosh-analytics-timeseries: line/area chart with a range picker,
  *  - frosh-analytics-breakdown: ranked top-N list with proportion bars.
- * Each concrete widget only supplies its criteria/aggregation `fetcher`.
+ * Each concrete chart widget only supplies its criteria/aggregation `fetcher`.
+ * GMV is a standalone table (yearly + rolling totals) using the same DAL helpers.
  */
 
 import { widgetRegistry } from '../../core/widget-registry';
@@ -16,6 +17,7 @@ Component.register('frosh-analytics-timeseries', () => import('./_base/frosh-ana
 Component.register('frosh-analytics-breakdown', () => import('./_base/frosh-analytics-breakdown'));
 
 // Concrete widget components.
+Component.register('frosh-widget-gmv', () => import('./frosh-widget-gmv'));
 Component.register('frosh-widget-total-sales', () => import('./frosh-widget-total-sales'));
 Component.register('frosh-widget-number-of-order', () => import('./frosh-widget-number-of-order'));
 Component.register('frosh-widget-average-order-value', () => import('./frosh-widget-average-order-value'));
@@ -48,6 +50,14 @@ interface AnalyticsWidgetDef {
 }
 
 const ANALYTICS_WIDGETS: AnalyticsWidgetDef[] = [
+    {
+        id: 'frosh-widget-gmv',
+        component: 'frosh-widget-gmv',
+        label: 'frosh-admin-dashboard.widget.gmv.label',
+        description: 'frosh-admin-dashboard.widget.gmv.description',
+        icon: 'regular-chart-bar',
+        acl: ['order.viewer'],
+    },
     {
         id: 'frosh-widget-total-sales',
         component: 'frosh-widget-total-sales',
