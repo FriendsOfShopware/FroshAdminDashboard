@@ -19,8 +19,8 @@ your layout is always exactly how you left it.
 
 ## The widgets
 
-**📊 Analytics** — 12 charts, each with its own time range and sales-channel filter:
-Total sales · Number of orders · Average order value · New customers · Total
+**📊 Analytics** — 13 widgets, each with its own time range and sales-channel filter:
+GMV · Total sales · Number of orders · Average order value · New customers · Total
 customers · Best-selling products · Top manufacturers · Orders by country ·
 Payment methods · Shipping methods · Sales by channel · Top promotion codes.
 

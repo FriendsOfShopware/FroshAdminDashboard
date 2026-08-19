@@ -42,6 +42,16 @@ export function baseOrderCriteria(salesChannelId?: string | null): InstanceType<
     return criteria;
 }
 
+/**
+ * Shopware Commercial's TurnoverCollector skips SaaS test orders
+ * (`custom_fields.saas_test_order = true`). Missing / null is kept.
+ */
+export function excludeSaasTestOrders(criteria: InstanceType<typeof Criteria>): InstanceType<typeof Criteria> {
+    criteria.addFilter(Criteria.not('AND', [Criteria.equals('customFields.saas_test_order', true)]));
+
+    return criteria;
+}
+
 export function dateRangeFilter(fromDate: Date, toDate: Date): ReturnType<typeof Criteria.range> {
     return Criteria.range('orderDate', {
         gte: toStorageDateOnly(fromDate),

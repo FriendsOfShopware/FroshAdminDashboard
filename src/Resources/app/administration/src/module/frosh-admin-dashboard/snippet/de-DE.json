@@ -46,6 +46,16 @@
             "unknown": "Unbekanntes Widget \"{ id }\". Das bereitstellende Plugin ist möglicherweise deaktiviert.",
             "noAccess": "Fehlende Berechtigungen",
             "missingPrivileges": "Dir fehlen folgende Berechtigungen: { privileges }",
+            "gmv": {
+                "label": "GMV",
+                "description": "Bruttowarenvolumen der letzten 3 Jahre sowie der rollierenden 6 / 12 / 18 Monate.",
+                "caption": "GMV der letzten 3 Jahre und rollierende Zeiträume",
+                "columnPeriod": "Zeitraum",
+                "columnGmv": "GMV",
+                "rolling6": "Letzte 6 Monate",
+                "rolling12": "Letzte 12 Monate",
+                "rolling18": "Letzte 18 Monate"
+            },
             "totalSales": {
                 "label": "Gesamtumsatz",
                 "description": "Gesamter Bestellwert im Zeitverlauf.",

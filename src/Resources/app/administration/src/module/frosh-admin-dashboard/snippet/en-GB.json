@@ -46,6 +46,16 @@
             "unknown": "Unknown widget \"{ id }\". The providing plugin may be disabled.",
             "noAccess": "Missing permissions",
             "missingPrivileges": "You are missing the following permissions: { privileges }",
+            "gmv": {
+                "label": "GMV",
+                "description": "Gross merchandise value of the last 3 years and rolling 6 / 12 / 18 months.",
+                "caption": "GMV of the last 3 years and rolling periods",
+                "columnPeriod": "Period",
+                "columnGmv": "GMV",
+                "rolling6": "Last 6 months",
+                "rolling12": "Last 12 months",
+                "rolling18": "Last 18 months"
+            },
             "totalSales": {
                 "label": "Total sales",
                 "description": "Total order value over time.",

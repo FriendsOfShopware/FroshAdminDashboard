@@ -7,7 +7,8 @@ The current feature set consists of:
     *   Add, remove and resize widgets in an edit mode
     *   Per-widget settings via a generic settings dialog
     *   Layout is saved per user
-*   Analytics widgets (12 charts)
+*   Analytics widgets (13 widgets)
+    *   GMV (last 3 years and rolling 6 / 12 / 18 months)
     *   Total sales, number of orders, average order value
     *   New customers and total customers over time
     *   Best-selling products, top manufacturers and orders by country
