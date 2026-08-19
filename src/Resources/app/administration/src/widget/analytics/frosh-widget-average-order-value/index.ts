@@ -8,8 +8,10 @@ import {
     dateRangeFilter,
     groupedByCurrencyFactorHistogram,
     groupedByDateHistogram,
+    parseCurrencyFactor,
+    normaliseAmount,
+    roundMoney,
 } from '../_common/order-criteria';
-import { normaliseAmount, parseCurrencyFactor, roundMoney } from '../_common/money';
 
 const { Criteria } = Shopware.Data;
 

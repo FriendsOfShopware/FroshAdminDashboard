@@ -3,8 +3,14 @@ import type { PropType } from 'vue';
 import type { Interval } from '../_common/interval';
 import type { SeriesPoint, TimeseriesResult } from '../_base/frosh-analytics-timeseries';
 import { parseBucketDate } from '../_common/series';
-import { baseOrderCriteria, dateRangeFilter, groupedByCurrencyFactorHistogram } from '../_common/order-criteria';
-import { normaliseAmount, parseCurrencyFactor, roundMoney } from '../_common/money';
+import {
+    baseOrderCriteria,
+    dateRangeFilter,
+    groupedByCurrencyFactorHistogram,
+    parseCurrencyFactor,
+    normaliseAmount,
+    roundMoney,
+} from '../_common/order-criteria';
 
 const { Criteria } = Shopware.Data;
 
