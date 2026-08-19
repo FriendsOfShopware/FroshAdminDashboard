@@ -1,0 +1,331 @@
+{
+  "_interval-DtKyyaa4.js": {
+    "file": "assets/interval-DtKyyaa4.js",
+    "name": "interval"
+  },
+  "_order-criteria-DTiE5J03.js": {
+    "file": "assets/order-criteria-DTiE5J03.js",
+    "name": "order-criteria",
+    "imports": [
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "_series-OIwFWqkc.js": {
+    "file": "assets/series-OIwFWqkc.js",
+    "name": "series"
+  },
+  "main.ts": {
+    "file": "assets/frosh-admin-dashboard-D3tD4CEN.js",
+    "name": "frosh-admin-dashboard",
+    "src": "main.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "widget/analytics/_base/frosh-analytics-timeseries/index.ts",
+      "widget/analytics/_base/frosh-analytics-breakdown/index.ts",
+      "widget/analytics/frosh-widget-gmv/index.ts",
+      "widget/analytics/frosh-widget-total-sales/index.ts",
+      "widget/analytics/frosh-widget-number-of-order/index.ts",
+      "widget/analytics/frosh-widget-average-order-value/index.ts",
+      "widget/analytics/frosh-widget-new-customer/index.ts",
+      "widget/analytics/frosh-widget-number-of-customer/index.ts",
+      "widget/analytics/frosh-widget-payment-method/index.ts",
+      "widget/analytics/frosh-widget-shipping-method/index.ts",
+      "widget/analytics/frosh-widget-sales-channel/index.ts",
+      "widget/analytics/frosh-widget-country/index.ts",
+      "widget/analytics/frosh-widget-best-selling-product/index.ts",
+      "widget/analytics/frosh-widget-manufacturer/index.ts",
+      "widget/analytics/frosh-widget-promotion-code/index.ts",
+      "widget/frosh-widget-notes/index.ts",
+      "widget/frosh-widget-tasks/index.ts",
+      "widget/frosh-widget-quick-links/index.ts",
+      "widget/frosh-widget-recent-orders/index.ts",
+      "widget/frosh-widget-recent-customers/index.ts",
+      "widget/frosh-widget-group-requests/index.ts",
+      "widget/frosh-widget-pending-reviews/index.ts",
+      "module/frosh-admin-dashboard/component/frosh-dashboard-grid/index.ts",
+      "module/frosh-admin-dashboard/component/frosh-dashboard-widget/index.ts",
+      "module/frosh-admin-dashboard/component/frosh-dashboard-add-widget-modal/index.ts",
+      "module/frosh-admin-dashboard/component/frosh-dashboard-settings-modal/index.ts",
+      "module/frosh-admin-dashboard/page/frosh-dashboard-index/index.ts"
+    ]
+  },
+  "module/frosh-admin-dashboard/component/frosh-dashboard-add-widget-modal/index.ts": {
+    "file": "assets/index-BtsU0cYA.js",
+    "name": "index",
+    "src": "module/frosh-admin-dashboard/component/frosh-dashboard-add-widget-modal/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "main.ts"
+    ],
+    "css": [
+      "assets/index-DbtkJPuT.css"
+    ]
+  },
+  "module/frosh-admin-dashboard/component/frosh-dashboard-grid/index.ts": {
+    "file": "assets/index-BXsN0TJt.js",
+    "name": "index",
+    "src": "module/frosh-admin-dashboard/component/frosh-dashboard-grid/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "main.ts"
+    ],
+    "css": [
+      "assets/index-DhDxGLIm.css"
+    ]
+  },
+  "module/frosh-admin-dashboard/component/frosh-dashboard-settings-modal/index.ts": {
+    "file": "assets/index-CtvaREuw.js",
+    "name": "index",
+    "src": "module/frosh-admin-dashboard/component/frosh-dashboard-settings-modal/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-C-jdsQfb.css"
+    ]
+  },
+  "module/frosh-admin-dashboard/component/frosh-dashboard-widget/index.ts": {
+    "file": "assets/index-CVMYpQpe.js",
+    "name": "index",
+    "src": "module/frosh-admin-dashboard/component/frosh-dashboard-widget/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "main.ts"
+    ],
+    "css": [
+      "assets/index-D0wiw8Ec.css"
+    ]
+  },
+  "module/frosh-admin-dashboard/page/frosh-dashboard-index/index.ts": {
+    "file": "assets/index-Bg1FjLnp.js",
+    "name": "index",
+    "src": "module/frosh-admin-dashboard/page/frosh-dashboard-index/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-DrFdocDN.css"
+    ]
+  },
+  "widget/analytics/_base/frosh-analytics-breakdown/index.ts": {
+    "file": "assets/index-DslXqiZp.js",
+    "name": "index",
+    "src": "widget/analytics/_base/frosh-analytics-breakdown/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_interval-DtKyyaa4.js"
+    ],
+    "css": [
+      "assets/index-rlQOmbyr.css"
+    ]
+  },
+  "widget/analytics/_base/frosh-analytics-timeseries/index.ts": {
+    "file": "assets/index-B9zNCdMl.js",
+    "name": "index",
+    "src": "widget/analytics/_base/frosh-analytics-timeseries/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_interval-DtKyyaa4.js"
+    ],
+    "css": [
+      "assets/index-BnR3mGgW.css"
+    ]
+  },
+  "widget/analytics/frosh-widget-average-order-value/index.ts": {
+    "file": "assets/index-HgSNDzUO.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-average-order-value/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_series-OIwFWqkc.js",
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-best-selling-product/index.ts": {
+    "file": "assets/index-DMZvIxZ6.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-best-selling-product/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-country/index.ts": {
+    "file": "assets/index-MDAN7cLK.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-country/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-gmv/index.ts": {
+    "file": "assets/index-Wy6AUBZS.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-gmv/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_interval-DtKyyaa4.js",
+      "_order-criteria-DTiE5J03.js"
+    ],
+    "css": [
+      "assets/index-tg7RRJaG.css"
+    ]
+  },
+  "widget/analytics/frosh-widget-manufacturer/index.ts": {
+    "file": "assets/index-CTEA1uIr.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-manufacturer/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-new-customer/index.ts": {
+    "file": "assets/index-BQksFU23.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-new-customer/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_series-OIwFWqkc.js",
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-number-of-customer/index.ts": {
+    "file": "assets/index-CXfzKseX.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-number-of-customer/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_series-OIwFWqkc.js",
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-number-of-order/index.ts": {
+    "file": "assets/index-CoUqA6XS.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-number-of-order/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_series-OIwFWqkc.js",
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-payment-method/index.ts": {
+    "file": "assets/index-pfzQgI-e.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-payment-method/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-promotion-code/index.ts": {
+    "file": "assets/index-BdCgQ8Bm.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-promotion-code/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-sales-channel/index.ts": {
+    "file": "assets/index-CV6izGqA.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-sales-channel/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-shipping-method/index.ts": {
+    "file": "assets/index-4tB5eeXL.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-shipping-method/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/analytics/frosh-widget-total-sales/index.ts": {
+    "file": "assets/index-CIHPNWZG.js",
+    "name": "index",
+    "src": "widget/analytics/frosh-widget-total-sales/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_series-OIwFWqkc.js",
+      "_order-criteria-DTiE5J03.js",
+      "_interval-DtKyyaa4.js"
+    ]
+  },
+  "widget/frosh-widget-group-requests/index.ts": {
+    "file": "assets/index-wwk-NLS6.js",
+    "name": "index",
+    "src": "widget/frosh-widget-group-requests/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-CqgfYodh.css"
+    ]
+  },
+  "widget/frosh-widget-notes/index.ts": {
+    "file": "assets/index-OnP1C10v.js",
+    "name": "index",
+    "src": "widget/frosh-widget-notes/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-OltvbSoe.css"
+    ]
+  },
+  "widget/frosh-widget-pending-reviews/index.ts": {
+    "file": "assets/index-CS6L3jmx.js",
+    "name": "index",
+    "src": "widget/frosh-widget-pending-reviews/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-D7mdH6jM.css"
+    ]
+  },
+  "widget/frosh-widget-quick-links/index.ts": {
+    "file": "assets/index-CgUwZXQa.js",
+    "name": "index",
+    "src": "widget/frosh-widget-quick-links/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-Cbr--Pii.css"
+    ]
+  },
+  "widget/frosh-widget-recent-customers/index.ts": {
+    "file": "assets/index-uYROj_o6.js",
+    "name": "index",
+    "src": "widget/frosh-widget-recent-customers/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-CAixPjyP.css"
+    ]
+  },
+  "widget/frosh-widget-recent-orders/index.ts": {
+    "file": "assets/index-CymroEkG.js",
+    "name": "index",
+    "src": "widget/frosh-widget-recent-orders/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-KadgUHaO.css"
+    ]
+  },
+  "widget/frosh-widget-tasks/index.ts": {
+    "file": "assets/index-GZcKJOHd.js",
+    "name": "index",
+    "src": "widget/frosh-widget-tasks/index.ts",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-BCyOSDDt.css"
+    ]
+  }
+}
