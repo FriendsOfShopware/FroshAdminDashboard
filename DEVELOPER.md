@@ -7,7 +7,7 @@ own plugin.
 
 | Concern | Location |
 | --- | --- |
-| Replaces the dashboard page | `module/frosh-admin-dashboard/index.ts` — a `routeMiddleware` swaps the component of the core `sw.dashboard.index` route for `frosh-dashboard-index`. Route name, navigation entry and ACL stay untouched. |
+| Replaces the dashboard page | `module/frosh-admin-dashboard/index.ts` — a `routeMiddleware` swaps the component of the core `sw.dashboard.index` route for `frosh-dashboard-index`. Route name, navigation entry and ACL stay untouched. By default the page also renders core injection points (`sw-settings-services-dashboard-banner`, `sw-dashboard__before-content` / `after-content`). Both can be turned off under **Settings → System → Plugins → Modular Admin Dashboard** (`showServicesBanner`, `showExtensionSections`). |
 | The board / drag & drop | `component/frosh-dashboard-grid` — native HTML5 drag-and-drop, edit mode, add/remove/resize. |
 | Widget chrome | `component/frosh-dashboard-widget` — header, drag handle and controls around each widget body. |
 | Widget catalogue | `core/widget-registry.ts` — a singleton registry of available widgets and groups. |
