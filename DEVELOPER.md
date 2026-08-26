@@ -109,6 +109,24 @@ back to the first supported size.
 
 ## Tests
 
+Administration unit tests are colocated under
+`src/Resources/app/administration/test/`. They use
+`@friendsofshopware/vitest-shopware-admin-bridge`, which discovers and boots
+the real Shopware 6 Administration and configures Vitest, Twig and Vue Test
+Utils. The plugin must be located in a Shopware checkout with the
+Administration npm dependencies installed. The bridge is installed from npm and
+locked through the Administration package lock. From the Administration
+extension directory, run:
+
+```bash
+npm ci
+npm run test:unit
+```
+
+Use the bridge's `mountShopwareComponent()` helper for component tests so the
+runtime configuration is built through Shopware's component and Twig factories
+before Vue Test Utils mounts it.
+
 End-to-end Playwright tests live in `tests/` and use the official
 [`@shopware-ag/acceptance-test-suite`](https://www.npmjs.com/package/@shopware-ag/acceptance-test-suite)
 (logged-in `AdminPage` fixture). They cover smoke + widget placement: the grid
