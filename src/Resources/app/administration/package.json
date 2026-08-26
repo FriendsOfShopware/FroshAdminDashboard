@@ -1,0 +1,13 @@
+{
+    "name": "frosh-admin-dashboard-administration",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "test:unit": "vitest run",
+        "test:unit:watch": "vitest"
+    },
+    "devDependencies": {
+        "@friendsofshopware/vitest-shopware-admin-bridge": "^0.1.1",
+        "vitest": "4.1.4"
+    }
+}
