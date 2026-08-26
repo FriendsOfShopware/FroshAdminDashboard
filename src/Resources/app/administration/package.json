@@ -7,7 +7,7 @@
         "test:unit:watch": "vitest"
     },
     "devDependencies": {
-        "@friendsofshopware/vitest-shopware-admin-bridge": "^0.1.1",
+        "@friendsofshopware/vitest-shopware-admin-bridge": "^0.1.2",
         "vitest": "4.1.4"
     }
 }
