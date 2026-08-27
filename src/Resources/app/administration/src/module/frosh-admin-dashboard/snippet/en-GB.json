@@ -26,7 +26,7 @@
                 "30Days": "Last 30 days",
                 "14Days": "Last 14 days",
                 "7Days": "Last 7 days",
-                "yesterday": "Yesterday"
+                "yesterday": "Since yesterday"
             }
         },
         "size": {
