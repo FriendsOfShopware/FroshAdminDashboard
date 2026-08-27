@@ -48,13 +48,19 @@
             "missingPrivileges": "Dir fehlen folgende Berechtigungen: { privileges }",
             "gmv": {
                 "label": "GMV",
-                "description": "Bruttowarenvolumen der letzten 3 Jahre sowie der rollierenden 6 / 12 / 18 Monate.",
-                "caption": "GMV der letzten 3 Jahre und rollierende Zeiträume",
+                "description": "Bruttowarenvolumen der letzten Abrechnungsjahre sowie der rollierenden 6 / 12 / 18 Monate.",
+                "caption": "GMV der letzten {years} Jahre und rollierende Zeiträume",
                 "columnPeriod": "Zeitraum",
                 "columnGmv": "GMV",
                 "rolling6": "Letzte 6 Monate",
                 "rolling12": "Letzte 12 Monate",
-                "rolling18": "Letzte 18 Monate"
+                "rolling18": "Letzte 18 Monate",
+                "yearCount": "Angezeigte Jahre",
+                "yearCountHelp": "Wie viele Abrechnungsjahre die Tabelle auflistet, das laufende eingeschlossen (1-20, Standard 3).",
+                "billingYearStartMonth": "Abrechnungsjahr beginnt im Monat",
+                "billingYearStartMonthHelp": "Monat, in dem ein Abrechnungsjahr beginnt (1-12). 1 zusammen mit Tag 1 bedeutet Kalenderjahre.",
+                "billingYearStartDay": "Abrechnungsjahr beginnt am Tag",
+                "billingYearStartDayHelp": "Tag dieses Monats, an dem ein Abrechnungsjahr beginnt (1-31, Standard 1). Kurze Monate begrenzen auf ihren letzten Tag."
             },
             "totalSales": {
                 "label": "Gesamtumsatz",

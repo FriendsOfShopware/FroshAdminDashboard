@@ -8,7 +8,7 @@ Der aktuelle Funktionsumfang besteht aus:
     *   Widget-Einstellungen über einen generischen Einstellungsdialog
     *   Die Anordnung wird pro Benutzer gespeichert
 *   Analyse-Widgets (13 Widgets)
-    *   GMV (letzte 3 Jahre sowie rollierende 6 / 12 / 18 Monate)
+    *   GMV (konfigurierbare Anzahl Abrechnungsjahre mit frei wählbarem Jahresbeginn, Standard 3 Kalenderjahre, sowie rollierende 6 / 12 / 18 Monate)
     *   Gesamtumsatz, Anzahl Bestellungen, durchschnittlicher Bestellwert
     *   Neue Kunden und Gesamtkunden im Zeitverlauf
     *   Bestseller-Produkte, Top-Hersteller und Bestellungen nach Land

@@ -40,6 +40,34 @@ const salesChannelSetting: WidgetSetting = {
     default: null,
 };
 
+/**
+ * GMV lists billing years, so both the number of years and where a year
+ * starts are configurable — month 1 / day 1 keeps it a plain calendar year.
+ */
+const gmvSettings: WidgetSetting[] = [
+    {
+        name: 'yearCount',
+        type: 'number',
+        label: 'frosh-admin-dashboard.widget.gmv.yearCount',
+        helpText: 'frosh-admin-dashboard.widget.gmv.yearCountHelp',
+        default: 3,
+    },
+    {
+        name: 'billingYearStartMonth',
+        type: 'number',
+        label: 'frosh-admin-dashboard.widget.gmv.billingYearStartMonth',
+        helpText: 'frosh-admin-dashboard.widget.gmv.billingYearStartMonthHelp',
+        default: 1,
+    },
+    {
+        name: 'billingYearStartDay',
+        type: 'number',
+        label: 'frosh-admin-dashboard.widget.gmv.billingYearStartDay',
+        helpText: 'frosh-admin-dashboard.widget.gmv.billingYearStartDayHelp',
+        default: 1,
+    },
+];
+
 interface AnalyticsWidgetDef {
     id: string;
     component: string;
@@ -47,6 +75,8 @@ interface AnalyticsWidgetDef {
     description: string;
     icon: string;
     acl: string[];
+    /** Widget specific settings, appended after the shared sales channel field. */
+    settings?: WidgetSetting[];
 }
 
 const ANALYTICS_WIDGETS: AnalyticsWidgetDef[] = [
@@ -57,6 +87,7 @@ const ANALYTICS_WIDGETS: AnalyticsWidgetDef[] = [
         description: 'frosh-admin-dashboard.widget.gmv.description',
         icon: 'regular-chart-bar',
         acl: ['order.viewer'],
+        settings: gmvSettings,
     },
     {
         id: 'frosh-widget-total-sales',
@@ -167,7 +198,7 @@ ANALYTICS_WIDGETS.forEach((widget) => {
         supportedSizes: ['medium', 'large', 'full'],
         group: 'analytics',
         acl: widget.acl,
-        settings: [salesChannelSetting],
+        settings: [salesChannelSetting, ...(widget.settings ?? [])],
     };
 
     widgetRegistry.registerWidget(definition);
