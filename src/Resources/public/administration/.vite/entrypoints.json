@@ -1,0 +1,51 @@
+{
+  "base": "/bundles/froshadmindashboard/administration/",
+  "entryPoints": {
+    "frosh-admin-dashboard": {
+      "css": [],
+      "dynamic": [
+        "/bundles/froshadmindashboard/administration/assets/index-BnO0V91_.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DJgHF7E0.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DXGJ3zQx.js",
+        "/bundles/froshadmindashboard/administration/assets/index-B4UsV9yR.js",
+        "/bundles/froshadmindashboard/administration/assets/index-BdSebCf3.js",
+        "/bundles/froshadmindashboard/administration/assets/index-CKpqSjvp.js",
+        "/bundles/froshadmindashboard/administration/assets/index-e4dtQ6bg.js",
+        "/bundles/froshadmindashboard/administration/assets/index-BjVQeElK.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DR4_ZyZn.js",
+        "/bundles/froshadmindashboard/administration/assets/index-MvDmfcC6.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DdLNYxME.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DHvpH3jx.js",
+        "/bundles/froshadmindashboard/administration/assets/index-BTCOmlKf.js",
+        "/bundles/froshadmindashboard/administration/assets/index-Deo84UpR.js",
+        "/bundles/froshadmindashboard/administration/assets/index-BG3ruTXI.js",
+        "/bundles/froshadmindashboard/administration/assets/index-OnP1C10v.js",
+        "/bundles/froshadmindashboard/administration/assets/index-GZcKJOHd.js",
+        "/bundles/froshadmindashboard/administration/assets/index-CgUwZXQa.js",
+        "/bundles/froshadmindashboard/administration/assets/index-CymroEkG.js",
+        "/bundles/froshadmindashboard/administration/assets/index-uYROj_o6.js",
+        "/bundles/froshadmindashboard/administration/assets/index-wwk-NLS6.js",
+        "/bundles/froshadmindashboard/administration/assets/index-CS6L3jmx.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DJwGaBZ1.js",
+        "/bundles/froshadmindashboard/administration/assets/index-CtRsyjCJ.js",
+        "/bundles/froshadmindashboard/administration/assets/index-DB691Dd3.js",
+        "/bundles/froshadmindashboard/administration/assets/index-CtvaREuw.js",
+        "/bundles/froshadmindashboard/administration/assets/index-Bg1FjLnp.js"
+      ],
+      "js": [
+        "/bundles/froshadmindashboard/administration/assets/frosh-admin-dashboard-CB8XGdwM.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

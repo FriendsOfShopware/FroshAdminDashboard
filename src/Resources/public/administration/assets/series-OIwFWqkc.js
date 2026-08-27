@@ -1,0 +1,2 @@
+function n(t){const r=s(t),e=Date.parse(r.replace(" ","T"));return Number.isNaN(e)?Date.parse(r):e}function o(t,r){return t.map(e=>({x:n(e.key),y:r(e)})).sort((e,a)=>e.x-a.x)}function s(t){if(/^\d{4}-\d{2}$/.test(t))return`${t}-01T00:00:00`;if(/^\d{4}-\d{2}-\d{2}$/.test(t))return`${t}T00:00:00`;throw new Error(`Invalid date format: ${t}`)}export{o as b,n as p};
+//# sourceMappingURL=series-OIwFWqkc.js.map
