@@ -8,7 +8,7 @@
     {% block frosh_widget_gmv_table %}
     <table v-else-if="rows.length" class="frosh-widget-gmv__table">
         <caption class="frosh-widget-gmv__caption">
-            {{ $tc('frosh-admin-dashboard.widget.gmv.caption') }}
+            {{ $tc('frosh-admin-dashboard.widget.gmv.caption', { years: yearCount }) }}
         </caption>
         <thead>
             <tr>
