@@ -23,6 +23,10 @@
             "empty": "Keine Daten im gewählten Zeitraum.",
             "rangeLabel": "Zeitraum auswählen",
             "range": {
+                "360Days": "Letzte 360 Tage",
+                "180Days": "Letzte 180 Tage",
+                "90Days": "Letzte 90 Tage",
+                "60Days": "Letzte 60 Tage",
                 "30Days": "Letzte 30 Tage",
                 "14Days": "Letzte 14 Tage",
                 "7Days": "Letzte 7 Tage",

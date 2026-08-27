@@ -28,11 +28,22 @@ interface RangeOption {
 }
 
 const RANGES: RangeOption[] = [
+    { label: '360Days', days: 360 },
+    { label: '180Days', days: 180 },
+    { label: '90Days', days: 90 },
+    { label: '60Days', days: 60 },
     { label: '30Days', days: 30 },
     { label: '14Days', days: 14 },
     { label: '7Days', days: 7 },
     { label: 'yesterday', days: 1 },
 ];
+
+const DEFAULT_RANGE = '30Days';
+
+/** Falls back to the default when the persisted range is unknown. */
+function resolveRange(value: unknown): string {
+    return typeof value === 'string' && RANGES.some((range) => range.label === value) ? value : DEFAULT_RANGE;
+}
 
 /**
  * Reusable base for the analytics time-series widgets. Renders the core
@@ -43,6 +54,8 @@ export default Shopware.Component.wrapComponentConfig({
     template,
 
     inject: ['acl'],
+
+    emits: ['update-settings'],
 
     props: {
         fetcher: {
@@ -65,7 +78,7 @@ export default Shopware.Component.wrapComponentConfig({
             default: 'number',
         },
         settings: {
-            type: Object as PropType<{ salesChannelId?: string | null }>,
+            type: Object as PropType<{ salesChannelId?: string | null; range?: string }>,
             required: false,
             default: () => ({}),
         },
@@ -82,7 +95,7 @@ export default Shopware.Component.wrapComponentConfig({
             series: [],
             summary: 0,
             isLoading: true,
-            selectedRange: '30Days',
+            selectedRange: DEFAULT_RANGE,
             currentRangeDates: null,
         };
     },
@@ -90,6 +103,11 @@ export default Shopware.Component.wrapComponentConfig({
     computed: {
         availableRanges(): string[] {
             return RANGES.map((range) => range.label);
+        },
+
+        /** sw-chart-card seeds its own select from this index on creation. */
+        defaultRangeIndex(): number {
+            return Math.max(0, this.availableRanges.indexOf(this.selectedRange));
         },
 
         salesChannelId(): string | null {
@@ -146,6 +164,7 @@ export default Shopware.Component.wrapComponentConfig({
     },
 
     created() {
+        this.selectedRange = resolveRange(this.settings.range);
         void this.load();
     },
 
@@ -184,7 +203,7 @@ export default Shopware.Component.wrapComponentConfig({
         },
 
         rangeDates(rangeLabel: string): { fromDate: Date; toDate: Date; interval: Interval } {
-            const range = RANGES.find((entry) => entry.label === rangeLabel) ?? RANGES[0];
+            const range = RANGES.find((entry) => entry.label === resolveRange(rangeLabel)) ?? RANGES[0];
 
             // Use the true current instant so the `lte` bound includes records
             // created in the last few hours. (`dateWithUserTimezone()` shifts the
@@ -222,6 +241,8 @@ export default Shopware.Component.wrapComponentConfig({
 
         onRangeUpdate(range: string): void {
             this.selectedRange = range;
+            // Persisted through the grid so the pick survives a reload.
+            this.$emit('update-settings', { range });
             void this.load();
         },
     },

@@ -15,7 +15,7 @@
             </template>
 
             <sw-context-menu-item
-                v-for="range in ['30Days', '14Days', '7Days', 'yesterday']"
+                v-for="range in availableRanges"
                 :key="range"
                 :class="{ 'is--active': selectedRange === range }"
                 @click="onRangeUpdate(range)"
