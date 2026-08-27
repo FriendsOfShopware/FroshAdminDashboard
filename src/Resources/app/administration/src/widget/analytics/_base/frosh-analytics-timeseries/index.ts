@@ -118,6 +118,11 @@ export default Shopware.Component.wrapComponentConfig({
 
         chartOptions(): Record<string, unknown> {
             return {
+                // Apex prints the value on every point for some series; the
+                // widgets are too small for that, the tooltip covers it.
+                dataLabels: {
+                    enabled: false,
+                },
                 xaxis: {
                     type: 'datetime',
                     min: this.currentRangeDates?.fromDate.getTime(),
