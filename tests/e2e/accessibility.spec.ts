@@ -13,16 +13,20 @@ test.describe('Frosh Admin Dashboard — accessibility', () => {
         await dashboard.goto();
 
         // The default dashboard renders two time-series widgets (Total sales,
-        // Number of orders). Their core sw-chart-card range <select> appears only
+        // Number of orders). Their core sw-chart-card range picker appears only
         // once data has loaded, and the widget then labels it asynchronously
-        // (the runtime workaround for the unlabelled core select). Wait until both
-        // selects exist AND are labelled before scanning — checking only
-        // "no unlabelled selects" would pass while none have rendered yet and let
-        // axe race the labelling on slower (CI) machines (false select-name).
-        const labelledSelects = AdminPage.locator(
-            '.frosh-dashboard-grid select[aria-label]:not([aria-label=""]), .frosh-dashboard-grid select[aria-labelledby]',
+        // (the runtime workaround for the unlabelled core picker). Wait until both
+        // pickers exist AND are labelled before scanning — checking only
+        // "no unlabelled fields" would pass while none have rendered yet and let
+        // axe race the labelling on slower (CI) machines (false select-name/label).
+        // The picker is a native <select> up to Shopware 6.7.13 and an mt-select
+        // text input from 6.7.14 on, so match both markups.
+        const labelledRangePickers = AdminPage.locator(
+            '.frosh-dashboard-grid select[aria-label]:not([aria-label=""]), ' +
+                '.frosh-dashboard-grid select[aria-labelledby], ' +
+                '.frosh-dashboard-grid .mt-select-selection-list__input[aria-label]:not([aria-label=""])',
         );
-        await expect.poll(async () => labelledSelects.count(), { timeout: 30_000 }).toBe(2);
+        await expect.poll(async () => labelledRangePickers.count(), { timeout: 30_000 }).toBe(2);
 
         const results = await new AxeBuilder({ page: AdminPage })
             .include('.frosh-dashboard-grid')
