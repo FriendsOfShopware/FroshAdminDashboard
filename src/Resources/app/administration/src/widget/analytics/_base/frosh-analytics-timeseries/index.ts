@@ -185,15 +185,17 @@ export default Shopware.Component.wrapComponentConfig({
         },
 
         /**
-         * The core sw-chart-card renders an unlabelled <select> for the range
-         * picker (and only after it stops loading). We don't own that markup, so
-         * poll briefly and add an aria-label for a11y (axe: select-name).
+         * The core sw-chart-card renders an unlabelled range picker: a native
+         * <select> up to Shopware 6.7.13, an mt-select text input from 6.7.14
+         * on (and the select variant appears only after it stops loading). We
+         * don't own that markup, so poll briefly and add an aria-label for a11y
+         * (axe: select-name / label).
          */
         labelRangeSelect(attempt = 0): void {
-            const select = this.$el?.querySelector?.('select');
-            if (select) {
-                if (!select.getAttribute('aria-label')) {
-                    select.setAttribute('aria-label', this.$tc('frosh-admin-dashboard.analytics.rangeLabel'));
+            const control = this.$el?.querySelector?.('select, .mt-select-selection-list__input');
+            if (control) {
+                if (!control.getAttribute('aria-label')) {
+                    control.setAttribute('aria-label', this.$tc('frosh-admin-dashboard.analytics.rangeLabel'));
                 }
                 return;
             }
