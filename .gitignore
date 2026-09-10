@@ -8,3 +8,4 @@
 .idea/
 .phpunit.result.cache
 /src/Resources/app/administration/.tmp/
+/.shopware/
