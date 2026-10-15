@@ -18,6 +18,12 @@ const ignoreHTTPSErrors =
     process.env.SHOPWARE_PLAYWRIGHT_IGNORE_HTTPS_ERRORS === 'true' ||
     process.env.SHOPWARE_PLAYWRIGHT_IGNORE_HTTPS_ERRORS === '1';
 
+// Empty keeps CI on Playwright's bundled Chromium. `chrome` uses the installed
+// Google Chrome. A CDP endpoint (local Lightpanda, or Lightpanda Cloud) is
+// attached from tests/fixtures.ts and must not also launch a local browser.
+const cdpEndpoint = process.env.PLAYWRIGHT_CDP_ENDPOINT;
+const useInstalledChrome = !cdpEndpoint && process.env.PLAYWRIGHT_CHANNEL === 'chrome';
+
 export default defineConfig({
     testDir: './e2e',
     fullyParallel: false,
@@ -38,15 +44,28 @@ export default defineConfig({
 
     use: {
         baseURL: process.env.APP_URL,
-        trace: 'retain-on-failure',
+        // Lightpanda has no tracing or screenshot pipeline; leave those off
+        // when the suite is attached over CDP.
+        trace: cdpEndpoint ? 'off' : 'retain-on-failure',
         video: 'off',
+        screenshot: 'off',
         ignoreHTTPSErrors,
     },
 
     projects: [
-        {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-        },
+        cdpEndpoint
+            ? {
+                  name: 'lightpanda',
+                  use: { trace: 'off', video: 'off', screenshot: 'off' },
+              }
+            : useInstalledChrome
+              ? {
+                    name: 'chrome',
+                    use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+                }
+              : {
+                    name: 'chromium',
+                    use: { ...devices['Desktop Chrome'] },
+                },
     ],
 });

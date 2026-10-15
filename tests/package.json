@@ -6,7 +6,10 @@
     "scripts": {
         "test": "playwright test",
         "test:ui": "playwright test --ui",
-        "test:report": "playwright show-report"
+        "test:report": "playwright show-report",
+        "test:chrome": "PLAYWRIGHT_CHANNEL=chrome playwright test",
+        "test:lightpanda": "node scripts/compare-browsers.mjs --only lightpanda",
+        "test:compare": "node scripts/compare-browsers.mjs"
     },
     "devDependencies": {
         "@playwright/test": "1.60.0",
