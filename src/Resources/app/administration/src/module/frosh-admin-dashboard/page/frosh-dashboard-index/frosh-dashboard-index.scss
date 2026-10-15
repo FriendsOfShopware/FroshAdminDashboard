@@ -3,5 +3,17 @@
         width: 100%;
         height: 100%;
         overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        box-sizing: border-box;
+        padding: 0 0 24px;
+    }
+
+    // Keep extension / services injection areas from collapsing when empty
+    &__extension-section {
+        &:empty {
+            display: none;
+        }
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Dashboard</title>
+        <title lang="de-DE">Dashboard</title>
+
+        <input-field type="bool">
+            <name>showServicesBanner</name>
+            <label>Show Shopware Services banner</label>
+            <label lang="de-DE">Shopware-Services-Banner anzeigen</label>
+            <helpText>Renders the core Shopware Services dashboard banner above the widget board (same as the default admin dashboard).</helpText>
+            <helpText lang="de-DE">Zeigt das Shopware-Services-Banner der Standard-Administration oberhalb des Widget-Boards an.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showExtensionSections</name>
+            <label>Show extension injection points</label>
+            <label lang="de-DE">Erweiterungs-Einschübe anzeigen</label>
+            <helpText>Keeps the core dashboard slots sw-dashboard__before-content and sw-dashboard__after-content so other plugins can inject UI around the board.</helpText>
+            <helpText lang="de-DE">Behält die Core-Dashboard-Slots sw-dashboard__before-content und sw-dashboard__after-content, damit andere Plugins UI um das Board herum einbinden können.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+
+</config>
