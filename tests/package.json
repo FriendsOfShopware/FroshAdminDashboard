@@ -10,7 +10,7 @@
     },
     "devDependencies": {
         "@playwright/test": "1.60.0",
-        "@shopware-ag/acceptance-test-suite": "^12.13.3",
+        "@shopware-ag/acceptance-test-suite": "^12.24.1",
         "@types/node": "^22.0.0",
         "dotenv": "^16.4.5"
     },
