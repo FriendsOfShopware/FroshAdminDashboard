@@ -38,6 +38,17 @@ decline inline) · Pending product reviews (approve, or decline with confirmatio
    rearrange, use the controls to resize, and the gear icon to configure.
 4. Click **Done** when you're happy. Your layout is saved automatically.
 
+## Plugin configuration
+
+Under **Settings → System → Plugins → Modular Admin Dashboard** you can toggle:
+
+| Option | Default | Effect |
+| --- | --- | --- |
+| **Show Shopware Services banner** | on | Core Services promo banner above the board |
+| **Show extension injection points** | on | Core slots `sw-dashboard__before-content` / `after-content` for other plugins |
+
+Turn either off if you want a board-only dashboard without those core injections.
+
 ## Extending it
 
 Other plugins can add their own widgets and widget groups to the dashboard.
