@@ -1,4 +1,4 @@
-import { test, expect } from '@shopware-ag/acceptance-test-suite';
+import { test, expect } from '../fixtures';
 import AxeBuilder from '@axe-core/playwright';
 import { DashboardPage } from '../pages/dashboard.page';
 
@@ -28,10 +28,17 @@ test.describe('Frosh Admin Dashboard — accessibility', () => {
         );
         await expect.poll(async () => labelledRangePickers.count(), { timeout: 30_000 }).toBe(2);
 
-        const results = await new AxeBuilder({ page: AdminPage })
+        const axe = new AxeBuilder({ page: AdminPage })
             .include('.frosh-dashboard-grid')
-            .withTags(['wcag2a', 'wcag2aa'])
-            .analyze();
+            .withTags(['wcag2a', 'wcag2aa']);
+        // axe's default finishRun opens a second blank page. Lightpanda rejects
+        // that with TargetAlreadyLoaded (one page per context), so stay in the
+        // page under test. Same-origin grid only; cross-origin frames are out of
+        // scope for this scan either way.
+        if (process.env.PLAYWRIGHT_CDP_ENDPOINT) {
+            axe.setLegacyMode(true);
+        }
+        const results = await axe.analyze();
 
         const blocking = results.violations.filter(
             (v) => v.impact === 'serious' || v.impact === 'critical',

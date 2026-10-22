@@ -1,4 +1,4 @@
-import { test, expect } from '@shopware-ag/acceptance-test-suite';
+import { test, expect } from '../fixtures';
 import { DashboardPage } from '../pages/dashboard.page';
 
 /**

@@ -28,10 +28,41 @@ shop before running.
 ## Run
 
 ```bash
-npm test            # headless
+npm test            # headless, Playwright's bundled Chromium
+npm run test:chrome # the same suite in installed Google Chrome
 npm run test:ui     # Playwright UI mode
 npm run test:report # open the last HTML report
 ```
+
+## Chrome vs Lightpanda
+
+`npm run test:compare` runs this suite twice and prints pass/fail, duration, and
+peak RSS:
+
+1. **Google Chrome**, via Playwright's `channel: 'chrome'` (the installed Chrome).
+2. **[Lightpanda](https://lightpanda.io/)**, a CDP browser. The script starts
+   `lightpanda serve` on `127.0.0.1:9222` and points Playwright at it with
+   `PLAYWRIGHT_CDP_ENDPOINT`. Install the binary from
+   [Lightpanda's nightly builds](https://lightpanda.io/docs/run-locally/installation/one-liner)
+   (default path `~/.local/bin/lightpanda`, override with `LIGHTPANDA_BIN`).
+
+Lightpanda is not a Chromium executable, so Playwright cannot launch it with
+`channel` or `executablePath`. `tests/fixtures.ts` attaches with
+`chromium.connectOverCDP` only when `PLAYWRIGHT_CDP_ENDPOINT` is set. Unset, the
+suite uses the normal browser fixture and CI stays on bundled Chromium.
+
+Lightpanda's layout places admin controls thousands of pixels down the page and
+does not scroll them into view, so the CDP fixture opens a 1600×12000 viewport.
+Otherwise Playwright reports every button as outside the viewport and the
+Shopware login click never lands. Lightpanda also allows one browser context
+and one page at a time. The fixture closes the previous context before each
+test (the Shopware helper only closes the page), and the axe scan runs in
+legacy mode so it does not open a second blank page.
+
+A Lightpanda Cloud browser (`wss://euwest.cloud.lightpanda.io/ws?token=…`) can
+be compared the same way by exporting `PLAYWRIGHT_CDP_ENDPOINT` before
+`npm run test:compare`. Cloud browsers cannot open a shop that is only reachable
+on localhost. `npm run test:lightpanda` runs just the Lightpanda half.
 
 ## What is covered
 
